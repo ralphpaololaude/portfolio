@@ -1,12 +1,9 @@
-name: Generate Consent Management API Docs
+name: Generate API docs and deploy to GitHub Pages
 
 on:
-  # Automatically trigger when push action/script/resource changes
+  # Automatically trigger when push to main branch
   push:
-    paths:
-      - '**.json'
-      - '**.sh'
-      - '**.yml'
+    branches: ["main"]
   # Enable running workflow manually from GitHub Actions
   workflow_dispatch:
 
@@ -21,10 +18,8 @@ jobs:
     name: Generate API Documentation
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Test generating API docs and deploying to GitHub Pages
-        uses: ./
+      - name: Generate API docs and deploy to GitHub Pages
+        uses: msayson/openapi-github-pages-action@v2.0.0
         with:
           api-configs: |-
             [

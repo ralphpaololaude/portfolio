@@ -1,0 +1,36 @@
+name: Generate Consent Management API Docs
+
+on:
+  # Automatically trigger when push action/script/resource changes
+  push:
+    paths:
+      - '**.json'
+      - '**.sh'
+      - '**.yml'
+  # Enable running workflow manually from GitHub Actions
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  generate-api-docs:
+    name: Generate API Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Test generating API docs and deploying to GitHub Pages
+        uses: ./
+        with:
+          api-configs: |-
+            [
+              {
+                "openapi-json-filepath": "assets/openapi/matchaio_openapi.yaml",
+                "api-doc-filepath": "latest/api-reference.html"
+              }
+            ]
+          api-docs-dir: docs

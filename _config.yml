@@ -24,7 +24,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   Hey! I'm Ralph, a technical writer with over 10 years of experience helping teams build better documentation.
   This portfolio showcases my work, projects, and my growing journey into AI automation and developer experience.
   
-baseurl: "/portfolio" # the subpath of your site, e.g. /blog
+baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://ralphpaololaude.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
 #twitter_username: jekyllrb
 github_username:  ralphpaololaude
@@ -56,7 +56,7 @@ remote_theme: pmarsceill/just-the-docs
 #   - vendor/ruby/
 
 # Just the Docs Configs
-color_scheme: dark
+# color_scheme: dark
 search_enabled: false
 last_edit_timestamp: true
 
@@ -67,3 +67,12 @@ callouts:
   note:
     title: Note
     color: blue
+  important:
+    title: Important
+    color: yellow
+
+favicon_ico: "/assets/images/favicon.ico"
+
+aux_links:
+  "Let's connect!":
+    - "/contact"

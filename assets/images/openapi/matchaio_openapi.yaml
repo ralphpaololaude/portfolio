@@ -1,0 +1,707 @@
+openapi: 3.0.2
+info:
+  version: '2026-07-14'
+  title: Matcha IO API Documentation
+  description: >-
+    # Getting Started
+
+    ## Pre-requisites
+
+    - Active merchant account
+    
+    - API key (environment-specific)
+
+    ## Authentication
+
+    All requests must include an API key in the header:
+
+    ```
+
+    Authorization: Bearer <api_key>
+
+    ```
+
+    Always secure your API keys. Do not expose API keys in client-side code.
+
+    ## Quickstart
+
+    To do a quick check for a successful call, send a `GET /v1/rewards` request. You should get a `200 OK` response with the following structure:
+
+    ```json
+
+    {
+      "limit": 25,
+      "next_cursor": null,
+      "items": []
+    }
+
+    ```
+servers:
+  - url: https://sandbox.api.matchaio.com/
+    description: Sanbox URL
+  - url: https://api.matchaio.com/
+    description: Production URL
+x-tagGroups:
+  - name: Resources
+    tags:
+      - Rewards
+tags:
+  - name: Rewards
+    description: >-
+      The **Rewards API** enables developers to create, manage, and track
+      customer rewards. It provides a reliable interface for issuing rewards,
+      retrieving reward details, reversing reward transactions, and generating
+      reward histories.
+
+      Use cases:
+
+      - Create rewards to grant incentives to customers
+
+      - Retrieve reward details for validation and tracking
+
+      - Reverse rewards to handle cancellations or corrections
+
+      - List rewards for reporting, reconciliation, and analytics
+security:
+  - BasicAuth: []
+components:
+  securitySchemes:
+    BasicAuth:
+      description: >-
+        The merchant alias should be provided as the username. The appropriate
+        API key should be provided as the password.
+      type: http
+      scheme: basic
+  schemas:
+    Customer:
+      title: Customer
+      description: This captures all of the components necessary for creating a customer.
+      properties:
+        email:
+          type: string
+          description: Customer's email address
+        phone:
+          type: string
+          maxLength: 255
+          description: Customer's phone number
+        name:
+          type: string
+          maxLength: 255
+          description: Customer's full name
+    PagedList:
+      type: object
+      title: PagedList
+      description: A paged list of items
+      properties:
+        limit:
+          name: limit
+          in: query
+          description: Number of items displayed per page. Default is 25.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 200
+            default: 25
+        next_cursor:
+          name: next_cursor
+          in: query
+          description: Opaque pagination cursor obtained from a previous request.
+          schema:
+            type: string
+    PagedListOfRewards:
+      type: object
+      title: PagedListOfRewards
+      description: Paged list of Rewards
+      allOf:
+        - $ref: '#/components/schemas/PagedList'
+        - properties:
+            items:
+              type: array
+              description: List of Rewards
+              readOnly: true
+              items:
+                $ref: '#/components/schemas/Reward'
+    Reward:
+      title: Reward
+      description: This provides information about a reward that has been retrieved.
+      properties:
+        reward_id:
+          type: string
+          description: Unique ID generated for a reward.
+        merchant_id:
+          type: string
+          description: Unique ID assigned to the merchant
+        order_id:
+          type: string
+          description: Unique ID of the order where the reward will be added to.
+        amount:
+          type: number
+          description: Reward amount
+          format: double
+        currency:
+          type: string
+          description: ISO 4217 three-letter currency code
+        customer:
+          description: Customer information
+          allOf:
+            - $ref: '#/components/schemas/Customer'
+        status:
+          type: string
+          description: Status of the reward
+          $ref: '#/components/schemas/Status'
+        created_at:
+          type: string
+          description: Reward creation timestamp in RFC 3339 format.
+          format: date-time
+        reversed_at:
+          type: string
+          description: Reward reversal timestamp in RFC 3339 format.
+          format: date-time
+    RewardInput:
+      title: RewardInput
+      description: This captures all of the components necessary for creating a reward.
+      properties:
+        order_id:
+          type: string
+          description: Unique ID of the order where the reward will be added to.
+          required: true
+        amount:
+          type: number
+          description: Reward amount
+          format: double
+          required: true
+        currency:
+          type: string
+          description: ISO 4217 three-letter currency code
+          required: true
+        customer:
+          description: Customer information
+          allOf:
+            - $ref: '#/components/schemas/Customer'
+    Status:
+      type: string
+      title: status
+      description: ''
+      enum:
+        - ACTIVE
+        - REVERSED
+        - PENDING
+  responses:
+    '202':
+      description: Accepted
+      headers:
+        Version:
+          $ref: '#/components/headers/Version'
+    '204':
+      description: No Content
+      headers:
+        Version:
+          $ref: '#/components/headers/Version'
+    '300':
+      description: Multiple Choices
+    '301':
+      description: Moved Permanently
+    '302':
+      description: Found
+    '304':
+      description: Not Modified
+    '400':
+      description: Bad Request. The request is invalid; correct all issues before resending
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Content-Type'
+        Version:
+          $ref: '#/components/headers/Version'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FailureWrapper'
+          examples:
+            FieldValidationFailure:
+              value:
+                status: 400
+                failures:
+                  - code: badRequest
+                    description: >-
+                      The request is invalid; correct all issues before
+                      resending
+                  - code: fieldValidationFailure
+                    description: field1 must be a number between 2000 and 2099, inclusive
+                    field: field1
+    '401':
+      description: A valid API key is required
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Content-Type'
+        Version:
+          $ref: '#/components/headers/Version'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FailureWrapper'
+          examples:
+            InvalidApiKey:
+              value:
+                status: 401
+                failures:
+                  - code: unauthorized
+                    description: A valid API key is required
+                    field: Authorization header
+    '403':
+      description: Public API keys may only be used to create and retrieve hosted cards
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Content-Type'
+        Version:
+          $ref: '#/components/headers/Version'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FailureWrapper'
+          examples:
+            FieldValidationFailure:
+              value:
+                status: 403
+                failures:
+                  - code: forbidden
+                    description: >-
+                      Public API keys may only be used to create and retrieve
+                      hosted cards
+    '404':
+      description: Not Found
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Content-Type'
+        Version:
+          $ref: '#/components/headers/Version'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FailureWrapper'
+          examples:
+            FieldValidationFailure:
+              value:
+                status: 404
+                failures:
+                  - code: notFound
+                    description: Not Found
+    '405':
+      description: >-
+        The given method may not be used here. Note that the
+        X-HTTP-Method-Override header can only be used to override POST with
+        either PATCH or DELETE
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Content-Type'
+        Version:
+          $ref: '#/components/headers/Version'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FailureWrapper'
+          examples:
+            FieldValidationFailure:
+              value:
+                status: 405
+                failures:
+                  - code: methodNotAllowed
+                    description: >-
+                      The given method may not be used here. Note that the
+                      X-HTTP-Method-Override header can only be used to override
+                      POST with either PATCH or DELETE
+    '406':
+      description: >-
+        The Accept request header must specify 'application/json;charset=UTF-8';
+        the Accept-Version request header if present, must reference a valid API
+        version
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Content-Type'
+        Version:
+          $ref: '#/components/headers/Version'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FailureWrapper'
+          examples:
+            FieldValidationFailure:
+              value:
+                status: 406
+                failures:
+                  - code: notAcceptable
+                    description: >-
+                      The Accept request header must specify
+                      'application/json;charset=UTF-8'; the Accept-Version
+                      request header if present, must reference a valid API
+                      version
+    '411':
+      description: Length required
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Content-Type'
+        Version:
+          $ref: '#/components/headers/Version'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FailureWrapper'
+          examples:
+            FieldValidationFailure:
+              value:
+                status: 411
+                failures:
+                  - code: lengthRequired
+                    description: Length required
+    '413':
+      description: Request entity is too large
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Content-Type'
+        Version:
+          $ref: '#/components/headers/Version'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FailureWrapper'
+          examples:
+            FieldValidationFailure:
+              value:
+                status: 413
+                failures:
+                  - code: payloadTooLarge
+                    description: Request entity is too large
+    '415':
+      description: >-
+        Unsupported Media Type. The Content-Type request header must specify
+        'application/json;charset=UTF-8'
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Content-Type'
+        Version:
+          $ref: '#/components/headers/Version'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FailureWrapper'
+          examples:
+            FieldValidationFailure:
+              value:
+                status: 415
+                failures:
+                  - code: unsupportedMediaType
+                    description: >-
+                      Unsupported Media Type. The Content-Type request header
+                      must specify 'application/json;charset=UTF-8'
+  parameters:
+    Accept:
+      name: Accept
+      in: header
+      description: Media types the client will accept.
+      schema:
+        type: string
+        example: application/json;charset=UTF-8
+    Accept-Version:
+      name: Accept-Version
+      in: header
+      description: API version requested by client.
+      schema:
+        type: integer
+        format: int32
+        example: 1
+    Content-Type:
+      name: Content-Type
+      in: header
+      description: Media type of the request body.
+      schema:
+        type: string
+        example: application/json;charset=UTF-8
+    limit:
+      name: limit
+      in: query
+      description: Number of items displayed per page. Default is 25.
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        maximum: 200
+        default: 25
+    next_cursor:
+      name: next_cursor
+      in: query
+      description: Opaque pagination cursor obtained from a previous request.
+      schema:
+        type: string
+    merchant_id:
+      name: merchant_id
+      in: query
+      description: Unique ID assigned to the merchant
+      schema:
+        type: string
+    status:
+      name: status
+      in: query
+      description: Status of the reward [PENDING, ACTIVE, REVERSED]
+      schema:
+        type: string
+  headers:
+    Content-Type:
+      description: Media type of the response body.
+      required: true
+      schema:
+        type: string
+        example: application/json;charset=UTF-8
+    Version:
+      description: API version.
+      required: true
+      schema:
+        type: string
+        example: '1'
+    Location:
+      description: '[Resource URL](#section/Overview/Values).'
+      required: true
+      schema:
+        type: string
+        format: url
+paths:
+  /rewards:
+    post:
+      summary: Create a reward
+      description: Add a reward amount to a customer’s order.
+      operationId: CreateReward
+      tags:
+        - Rewards
+      parameters:
+        - $ref: '#/components/parameters/Accept'
+        - $ref: '#/components/parameters/Accept-Version'
+        - $ref: '#/components/parameters/Content-Type'
+      requestBody:
+        description: object (Reward)
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RewardInput'
+            examples:
+              CreateReward:
+                summary: Create a reward.
+                value:
+                  merchant_id: Goq4dq3zH7ca
+                  order_id: 66fg3Qw7tfU9
+                  amount: 5
+                  currency: AUD
+                  customer:
+                    email: john.doe@shopper.com
+                    phone: '+61512345678'
+                    name: John Doe
+      responses:
+        '201':
+          description: Created
+          headers:
+            Content-Type:
+              $ref: '#/components/headers/Content-Type'
+            Location:
+              $ref: '#/components/headers/Location'
+            Version:
+              $ref: '#/components/headers/Version'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reward'
+              examples:
+                CreateReward:
+                  summary: Add a reward amount to a customer’s order.
+                  value:
+                    reward_id: 6LdX53JI0cO9
+                    merchant_id: Goq4dq3zH7ca
+                    order_id: 66fg3Qw7tfU9
+                    amount: 5
+                    currency: AUD
+                    customer:
+                      email: john.doe@shopper.com
+                      phone: '+61512345678'
+                      name: John Doe
+                    status: REVERSED
+                    created_at: '2026-04-04T12:00:00Z'
+                    reversed_at: null
+        '400':
+          $ref: '#/components/responses/400'
+        '411':
+          $ref: '#/components/responses/411'
+        '413':
+          $ref: '#/components/responses/413'
+        '415':
+          $ref: '#/components/responses/415'
+    get:
+      summary: List rewards
+      description: Generate a list of all rewards for the merchant.
+      operationId: RetrieveRewards
+      tags:
+        - Rewards
+      parameters:
+        - $ref: '#/components/parameters/Accept'
+        - $ref: '#/components/parameters/Accept-Version'
+        - $ref: '#/components/parameters/next_cursor'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              $ref: '#/components/headers/Content-Type'
+            Version:
+              $ref: '#/components/headers/Version'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagedListOfRewards'
+              examples:
+                ListOfRewards:
+                  summary: List Of Rewards
+                  value:
+                    limit: 25
+                    next_cursor: null
+                    items:
+                      - reward_id: 6LdX53JI0cO9
+                        merchant_id: Goq4dq3zH7ca
+                        order_id: 66fg3Qw7tfU9
+                        amount: 5
+                        currency: AUD
+                        customer:
+                          email: john.doe@shopper.com
+                          phone: '+61512345678'
+                          name: John Doe
+                        status: REVERSED
+                        created_at: '2026-04-04T12:00:00Z'
+                        reversed_at: '2026-04-05T12:00:00Z'
+                      - reward_id: qL25dD3rkPd5
+                        merchant_id: Goq4dq3zH7ca
+                        order_id: tlFO4o7Tg9Fv
+                        amount: 12.38
+                        currency: AUD
+                        customer:
+                          email: jane.doe@shopper.com
+                          phone: '+61587654321'
+                          name: Jane Doe
+                        status: ACTIVE
+                        created_at: '2026-04-14T12:00:00Z'
+                        reversed_at: null
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+  /rewards/{reward_id}:
+    parameters:
+      - $ref: '#/components/parameters/Accept'
+      - $ref: '#/components/parameters/Accept-Version'
+      - name: reward_id
+        in: path
+        description: Unique ID generated for a reward.
+        required: true
+        example: 6LdX53JI0cO9
+        schema:
+          type: string
+    get:
+      summary: Retrieve Reward
+      description: Retrieve a single reward by ID.
+      tags:
+        - Rewards
+      operationId: RetrieveReward
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              $ref: '#/components/headers/Content-Type'
+            Version:
+              $ref: '#/components/headers/Version'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reward'
+              examples:
+                Batch:
+                  summary: Retrieve a reward by ID.
+                  value:
+                    reward_id: 6LdX53JI0cO9
+                    merchant_id: Goq4dq3zH7ca
+                    order_id: 66fg3Qw7tfU9
+                    amount: 5
+                    currency: AUD
+                    customer:
+                      email: john.doe@shopper.com
+                      phone: '+61512345678'
+                      name: John Doe
+                    status: ACTIVE
+                    created_at: '2026-04-04T12:00:00Z'
+                    reversed_at: null
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+  /rewards/{reward_id}/reverse:
+    post:
+      summary: Reverse a reward
+      description: >-
+        Use this endpoint to make cancellations or corrections on an order’s
+        reward. Only ACTIVE rewards can be reversed.
+      operationId: ReverseReward
+      tags:
+        - Rewards
+      parameters:
+        - $ref: '#/components/parameters/Accept'
+        - $ref: '#/components/parameters/Accept-Version'
+        - name: reward_id
+          in: path
+          description: Unique ID generated for a reward.
+          required: true
+          example: 6LdX53JI0cO9
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Created
+          headers:
+            Content-Type:
+              $ref: '#/components/headers/Content-Type'
+            Location:
+              $ref: '#/components/headers/Location'
+            Version:
+              $ref: '#/components/headers/Version'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reward'
+              examples:
+                ReverseReward:
+                  summary: Reverse a reward.
+                  value:
+                    reward_id: 6LdX53JI0cO9
+                    merchant_id: Goq4dq3zH7ca
+                    order_id: 66fg3Qw7tfU9
+                    amount: 5
+                    currency: AUD
+                    customer:
+                      email: john.doe@shopper.com
+                      phone: '+61512345678'
+                      name: John Doe
+                    status: REVERSED
+                    created_at: '2026-04-04T12:00:00Z'
+                    reversed_at: '2026-04-05T12:00:00Z'
+        '400':
+          $ref: '#/components/responses/400'
+        '411':
+          $ref: '#/components/responses/411'
+        '413':
+          $ref: '#/components/responses/413'
+        '415':
+          $ref: '#/components/responses/415'

@@ -26,4 +26,4 @@ jobs:
                 "api-doc-filepath": "docs/api-documentation/api-reference.html"
               }
             ]
-          api-docs-dir: docs
+          api-docs-dir: docs/api-documentation

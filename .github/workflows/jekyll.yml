@@ -42,7 +42,7 @@ jobs:
             [
               {
                 "openapi-json-filepath": "assets/openapi/matchaio_openapi.yaml",
-                "api-doc-filepath": "docs/api-documentation/index.html"
+                "api-doc-filepath": "docs/api-documentation/api-reference.html"
               }
             ]
           api-docs-dir: docs/api-documentation

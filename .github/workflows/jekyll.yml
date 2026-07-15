@@ -56,7 +56,7 @@ jobs:
   generate-api-docs:
     name: Generate API Documentation
     runs-on: ubuntu-latest
-    environment: github-pages  # Add this line
+    # environment: github-pages  # Add this line
     steps:
       - name: Generate API docs and deploy to GitHub Pages
         uses: msayson/openapi-github-pages-action@v2.0.0

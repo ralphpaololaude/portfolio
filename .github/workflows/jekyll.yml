@@ -27,8 +27,30 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+
+
+ # Create Open API Spec static page
+  generate-api-docs:
+    name: Generate API Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Generate API docs
+        uses: msayson/openapi-github-pages-action@v2.0.0
+        with:
+          api-configs: |-
+            [
+              {
+                "openapi-json-filepath": "assets/openapi/matchaio_openapi.yaml",
+                "api-doc-filepath": "docs/api-documentation/index.html"
+              }
+            ]
+          api-docs-dir: docs/api-documentation
+
   # Build job
   build:
+    name: Build Jekyll site
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -51,25 +73,6 @@ jobs:
       - name: Upload artifact
         # Automatically uploads an artifact from the './_site' directory by default
         uses: actions/upload-pages-artifact@v3
-
-  # Create Open API Spec static page
-  generate-api-docs:
-    name: Generate API Documentation
-    runs-on: ubuntu-latest
-    # environment: github-pages  # Add this line
-    steps:
-      - name: Generate API docs and deploy to GitHub Pages
-        uses: msayson/openapi-github-pages-action@v2.0.0
-        with:
-          api-configs: |-
-            [
-              {
-                "openapi-json-filepath": "assets/openapi/matchaio_openapi.yaml",
-                "api-doc-filepath": "docs/api-documentation/index.html"
-              }
-            ]
-          api-docs-dir: docs/api-documentation
-
   # Deployment job
   deploy:
     environment:

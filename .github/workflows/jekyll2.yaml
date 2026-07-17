@@ -4,7 +4,7 @@
 # documentation.
 
 # Sample workflow for building and deploying a Jekyll site to GitHub Pages
-name: Build Portfolio - Full
+name: Build Portfolio - No API Action
 
 on:
   # Runs on pushes targeting the default branch
@@ -28,30 +28,6 @@ concurrency:
 
 jobs:
 
-  # Create Open API Spec static page
-  generate-api-docs:
-    name: Generate API Documentation
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-      - name: Generate API docs
-        uses: msayson/openapi-github-pages-action@v2.0.0
-        with:
-          api-configs: |-
-            [
-              {
-                "openapi-json-filepath": "assets/openapi/matchaio_openapi.yaml",
-                "api-doc-filepath": "/api-reference.html"
-              }
-            ]
-          api-docs-dir: docs/api-documentation
-      - name: Upload API documentation
-        uses: actions/upload-artifact@v4
-        with:
-          name: api-docs
-          path: docs/api-documentation
-
   # Build job
   build:
     name: Build Jekyll site
@@ -73,17 +49,6 @@ jobs:
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
-      - name: Download API docs
-        uses: actions/download-artifact@v4
-        with:
-          name: api-docs
-          path: docs
-      - name: Copy API docs into site
-        run: cp -r docs/api-documentation _site/docs/api-documentation
-      - name: Delete old github-pages artifacts
-        uses: geekyeggo/delete-artifact@v5
-        with:
-          name: github-pages
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
   

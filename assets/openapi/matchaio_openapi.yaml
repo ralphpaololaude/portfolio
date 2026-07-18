@@ -1,8 +1,14 @@
 openapi: 3.0.2
 info:
   version: '2026-07-14'
-  title: Matcha IO API Documentation
+  title: MatchaIO API Documentation
   description: >-
+    The MatchaIO Rewards API allows merchants to securely create, retrieve, reverse, and list 
+    reward transactions through a RESTful interface. Designed for server-to-server integrations, 
+    the API uses API key authentication, returns JSON responses, and supports cursor-based 
+    pagination for efficiently retrieving reward data. It enables merchants to automate reward 
+    management and integrate reward functionality into their applications.
+
     # Getting Started
 
     ## Pre-requisites
@@ -36,6 +42,18 @@ info:
     }
 
     ```
+
+    # Changelog
+
+    ## 2026-07-14
+
+    Initial release. The following endpoints are available:
+
+    - `POST /rewards` - Create a reward
+    - `GET /rewards` - Retrieve reward details
+    - `PUT /rewards/{reward_id}` - Update a reward
+    - `DELETE /rewards/{reward_id}` - Reverse a reward
+    
 servers:
   - url: https://sandbox.api.matchaio.com/
     description: Sanbox URL

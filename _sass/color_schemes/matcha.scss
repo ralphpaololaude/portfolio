@@ -1,0 +1,17 @@
+@import "./color_schemes/dark";
+
+$body-background-color: $matcha-000;
+$body-heading-color: $matcha-400;
+$body-text-color: $matcha-400;
+$link-color: $matcha-400;
+$nav-child-link-color: $matcha-400;
+$sidebar-color: $matcha-300;
+$base-button-color: $grey-dk-250;
+$btn-primary-color: $matcha-300;
+$code-background-color: $matcha-400; // github-dark bg color
+$code-linenumber-color: #e6edf3; // github-dark line number color
+$feedback-color: darken($sidebar-color, 3%);
+$table-background-color: $grey-dk-250;
+$search-background-color: $grey-dk-250;
+$search-result-preview-color: $grey-lt-300;
+$border-color: $matcha-400;

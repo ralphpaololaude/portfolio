@@ -4,4 +4,4 @@ _site
 .jekyll-metadata
 gemfile.lock.bu
 vendor
-docs/blogs
+docs/blog

@@ -1,0 +1,16 @@
+/* Theme */
+
+:root  > * {
+  --md-primary-fg-color:        #4BBEE3;
+  --md-primary-fg-color--light: #4BBEE3;
+  --md-primary-fg-color--dark:  #4BBEE3;
+}
+[data-md-color-scheme="slate"] {
+  --md-hue: 225; 
+}
+
+/* Icons */
+
+.linkedin {
+  color: #0072b1;
+}

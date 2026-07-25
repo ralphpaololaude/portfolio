@@ -4,5 +4,7 @@ title: Workflows
 nav_order: 4
 ---
 
-# Coming soon!
+# Automation workflows
+
+Coming soon!
 

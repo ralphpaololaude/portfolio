@@ -51,18 +51,6 @@ jobs:
       - name: Install Python dependencies
         run: |
           pip install mkdocs-material
-          pip install .[recommended,git,imaging]
-
-      - name: Install Insiders build
-        if: github.event.repository.fork == false
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-          git clone --depth 1 https://${GH_TOKEN}@github.com/squidfunk/mkdocs-material-overrides.git
-          pip install -e mkdocs-material-overrides
-          cp mkdocs-material-overrides/mkdocs.yml mkdocs.yml
-          rm -rf material
-          cp -r mkdocs-material-overrides/material material
 
       - name: Build documentation
         env:

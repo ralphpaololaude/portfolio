@@ -1,16 +1,58 @@
 /* Theme */
 
 :root  > * {
-  --md-primary-fg-color:        #4BBEE3;
-  --md-primary-fg-color--light: #4BBEE3;
-  --md-primary-fg-color--dark:  #4BBEE3;
+  --md-primary-fg-color:                #576b33;
+  --md-primary-fg-color--light:         #576b33;
+  --md-primary-fg-color--dark:          #576b33;
+
+  --md-accent-fg-color:                 #74a12e;
+  --md-accent-fg-color--transparent:    #74a12e;
+
+  --md-footer-bg-color:                 #94b556;
+  --md-footer-bg-color--dark:           #576b33;
 }
+
+/* 
+:root  > * {
+  --md-primary-fg-color:                #16B8F3;
+  --md-primary-fg-color--light:         #16B8F3;
+  --md-primary-fg-color--dark:          #16B8F3;
+
+  --md-accent-fg-color:                 #16B8F3;
+  --md-accent-fg-color--transparent:    #16B8F3;
+
+  --md-footer-bg-color:                 #16B8F3;
+  --md-footer-bg-color--dark:           #16B8F3;
+}
+*/
+
 [data-md-color-scheme="slate"] {
-  --md-hue: 225; 
+  --md-default-bg-color:                hsla(0, 100%, 0%, 1); 
 }
 
 /* Icons */
 
 .linkedin {
   color: #0072b1;
+}
+
+/* Typography */
+
+
+
+/* Grids */
+
+.grid-header {
+  text-align:center;
+}
+.grid a {
+  font-weight: bold;
+}
+
+/* UX Elements */
+
+.skillset .md-button {
+  margin: 2px 0px;
+  padding: 5px 8px;
+  cursor: default;
 }

@@ -4,6 +4,7 @@ site_url: https://ralphpaololaude.github.io/portfolio
 # Theme
 theme:
   name: material
+  custom_dir: overrides
   icon:
     logo: material/code-braces
   favicon: favicon.ico
@@ -16,21 +17,22 @@ theme:
     toggle:
       icon: material/brightness-7
       name: Switch to dark mode
-    primary: custom
-    accent:  blue
+    primary: zima
+    accent:  zima
   # Palette toggle for dark mode
   - media: "(prefers-color-scheme: dark)"
     scheme: slate
     toggle:
       icon: material/brightness-4
       name: Switch to light mode
-    primary: custom
-    accent:  blue
+    primary: zima
+    accent:  custom
   features:
     - navigation.tabs
     - navigation.instant
     - navigation.sections
     - navigation.indexes
+    - content.tabs.link
 
 # Extras
 extra_css:
@@ -41,35 +43,36 @@ extra_javascript:
 # Markdown Extensions
 markdown_extensions:
   - attr_list
+  - md_in_html
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji 
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
 
 # Plugins
-#plugins:
-#  - blog
+plugins:
+  - blog
 
 # Footer
 copyright: Copyright &copy; 2026 Ralph Laude
 extra:
   social:
-    - icon: fontawesome/brands/instagram
-      link: https://www.instagram.com/rappaolau
-      name: ralphpaololaude on LinkedIn
-    - icon: fontawesome/brands/linkedin
-      link: https://www.linkedin.com/in/ralphpaololaude/
-      name: ralphpaololaude on LinkedIn
     - icon: fontawesome/brands/github
       link: https://github.com/ralphpaololaude
       name: ralphpaololaude on GitHub
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/ralphpaololaude/
+      name: ralphpaololaude on LinkedIn
+    - icon: fontawesome/brands/instagram
+      link: https://www.instagram.com/rappaolau
+      name: ralphpaololaude on LinkedIn
 
 # Page tree
 nav:
-  - Home: index.md
-  - Technical writing: 
-    - api-doc/index.md
-    - API documentation: api-doc/api-doc.md
-  - Workflows:
-    - workflows/index.md
+  - Heya!: index.md
+  - Projects:
+    - projects/index.md
   - Blog:
     - blog/index.md

@@ -1,0 +1,21 @@
+{
+    "skills": {
+        "openapi" : {"name": "OpenAPI"},
+        "apidoc"  : {"name": "API Documentation"},
+        "docqa"   : {"name": ""},
+        "release"   : {"name": "Release Notes"},
+        "devdoc"   : {"name": "Developer Documentation"},
+        "kbm"   : {"name": "Knowledge Base Management"},
+        "aem"   : {"name": "Adobe Experience Manager"},
+        "postman"   : {"name": "Postman"},
+        "gl"   : {"name": "GitLab"},
+        "jira"   : {"name": "JIRA"},
+        "conf"   : {"name": "Confluence"},
+        "cms"   : {"name": "Content Management Systems"},
+        "rest"   : {"name": "REST API"},
+        "swag"   : {"name": "Swagger"},
+        "web"   : {"name": "HTML/CSS"},
+        "xml"   : {"name": "XML"},
+        "js"   : {"name": "JavaScript"}
+    }
+}

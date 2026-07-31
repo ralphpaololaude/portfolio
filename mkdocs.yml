@@ -32,10 +32,12 @@ theme:
     accent:  custom
   features:
     - navigation.tabs
-    - navigation.instant
     - navigation.sections
     - navigation.indexes
     - content.tabs.link
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tracking
 
 # Extras
 extra_css:

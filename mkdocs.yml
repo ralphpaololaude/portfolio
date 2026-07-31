@@ -6,7 +6,7 @@ repo_name: ralphpaololaude/portfolio
 # Theme
 theme:
   name: material
-  custom_dir: overrides
+  custom_dir: material/overrides
   icon:
     logo: material/code-braces
     repo: fontawesome/brands/github

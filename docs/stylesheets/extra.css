@@ -1,5 +1,4 @@
 /* Theme */
-
 :root  > * {
   --md-primary-fg-color:                #576b33;
   --md-primary-fg-color--light:         #576b33;
@@ -12,8 +11,7 @@
   --md-footer-bg-color--dark:           #576b33;
 }
 
-/* 
-:root  > * {
+[data-md-color-scheme="zima"] {
   --md-primary-fg-color:                #16B8F3;
   --md-primary-fg-color--light:         #16B8F3;
   --md-primary-fg-color--dark:          #16B8F3;
@@ -24,7 +22,6 @@
   --md-footer-bg-color:                 #16B8F3;
   --md-footer-bg-color--dark:           #16B8F3;
 }
-*/
 
 [data-md-color-scheme="slate"] {
   --md-default-bg-color:                hsla(0, 100%, 0%, 1); 
@@ -37,7 +34,10 @@
 }
 
 /* Typography */
-
+code.date-label {
+  font-size: 0.7rem;
+  font-style: italic;
+}
 
 
 /* Grids */
@@ -50,9 +50,46 @@
 }
 
 /* UX Elements */
-
-.skillset .md-button {
+.skillset code {
   margin: 2px 0px;
   padding: 5px 8px;
-  cursor: default;
+
+  &:is(:focus, :hover) {
+    cursor: default;
+  }
 }
+div.pfp-box{
+  display: grid;
+  place-items: center;
+}
+
+p.pfp {
+  background-color: var(--md-primary-fg-color);
+  padding: 3px;
+  width: 200px;
+  height: 200px;
+  border-radius: 100px; 
+}
+
+
+
+/*
+.skillset code {
+    margin-top: px2rem(10px);
+    margin-right: px2rem(10px);
+    color: var(--md-primary-bg-color);
+
+    &:is(:focus, :hover) {
+      color: var(--md-accent-bg-color);
+      background-color: var(--md-primary-fg-color);
+      border-color: var(--md-primary-fg-color);
+      cursor: default;
+    }
+
+    &--primary {
+      color: hsla(280, 37%, 48%, 1);
+      background-color: var(--md-accent-bg-color);
+      border-color: var(--md-accent-bg-color);
+    }
+}
+*/

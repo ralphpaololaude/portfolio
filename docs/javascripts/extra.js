@@ -1,5 +1,6 @@
 document$.subscribe(function() {
     // fAddSkillLabelClass()
+    //fRemoveHeader1()
 })
 
 function fAddSkillLabelClass(){
@@ -15,6 +16,11 @@ function fAddSkillLabelClass(){
     }
 
 
+}
+
+function fRemoveHeader1(){
+    var header1 = document.querySelectorAll('h1');
+    header1.remove()
 }
 
 

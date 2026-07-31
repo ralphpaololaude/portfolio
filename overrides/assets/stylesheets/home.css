@@ -1,0 +1,60 @@
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color:                hsla(0, 100%, 0%, 1); 
+  --md-typeset-color:                  hsla(0, 100%, 100%, 1);
+}
+
+/* Hide default header, sidebar, and footer */
+.md-header, .md-sidebar--primary, .md-sidebar--secondary, .md-footer, .md-content, .md-main {
+  display: none !important;
+}
+
+body {
+    background-color: var(--md-default-bg-color);
+    color: var(--md-primary-fg-color);
+    font-family: 'Special Elite', sans-serif;
+}
+
+
+
+.lp-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: normal;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.navigation a {
+    border: .1rem solid;
+    border-radius: .1rem;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 700;
+    padding: .625em 2em;
+    transition: color 500ms, background-color 500ms, border-color 500ms;
+
+    &:is(:focus, :hover) {
+        color: var(--md-primary-bg-color);
+        background-color: var(--md-primary-fg-color);
+    }
+
+    &--primary {
+      background-color: var(--md-accent-fg-color);
+    }
+}
+
+p.pfp img {
+  width: 194px;
+  height: 194px; 
+}

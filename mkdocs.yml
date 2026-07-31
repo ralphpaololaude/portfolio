@@ -1,5 +1,7 @@
 site_name: Ralph Laude | Portfolio
 site_url: https://ralphpaololaude.github.io/portfolio
+repo_url: https://github.com/ralphpaololaude/portfolio
+repo_name: ralphpaololaude/portfolio
 
 # Theme
 theme:
@@ -7,6 +9,7 @@ theme:
   custom_dir: overrides
   icon:
     logo: material/code-braces
+    repo: fontawesome/brands/github
   favicon: favicon.ico
   font:
     text: Noto Sans
@@ -17,15 +20,15 @@ theme:
     toggle:
       icon: material/brightness-7
       name: Switch to dark mode
-    primary: zima
-    accent:  zima
+    primary: custom
+    accent:  custom
   # Palette toggle for dark mode
   - media: "(prefers-color-scheme: dark)"
     scheme: slate
     toggle:
       icon: material/brightness-4
       name: Switch to light mode
-    primary: zima
+    primary: custom
     accent:  custom
   features:
     - navigation.tabs
@@ -71,8 +74,9 @@ extra:
 
 # Page tree
 nav:
-  - Heya!: index.md
+  - Home: index.md
   - Projects:
     - projects/index.md
+  - About: about.md
   - Blog:
     - blog/index.md

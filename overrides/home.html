@@ -1,0 +1,39 @@
+{#- overrides/home.html -#}
+{% extends "base.html" %}
+
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ 'assets/stylesheets/home.css' | url }}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Special+Elite">
+{% endblock %}
+
+{% block tabs %}
+  <!-- Custom Homepage Content -->
+  <section class="lp-container">
+    <div class="pfp-box">
+      <p class="pfp">
+      <img src="assets/images/pfp.png" alt="Profile photo"/>
+      </p>
+    <div class="hero">
+      <h1>Ralph Laude</h1>
+      <p>Technical Documentation | Automations and Workflows</p>
+      <div class="navigation">
+          <a href="projects/index.html" class="md-button md-button--primary">Projects</a>
+          <a href="blog/index.html" class="md-button md-button--primary">Blog</a>
+          <a href="about/index.html" class="md-button md-button--primary">About</a>
+      </div>
+      <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    </div>
+  </section>
+{% endblock %}   
+
+{% block footer %}
+  <!-- Add scripts that need to run before here -->
+  {{ super() }}
+  <!-- Add scripts that need to run afterwards here -->
+{% endblock %}

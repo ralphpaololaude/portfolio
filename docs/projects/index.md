@@ -6,8 +6,6 @@ hide:
 
 # My sample works
 
-## Technical Documentation
-
 <div class="grid cards" markdown>
 
 -   [:simple-swagger:{ .lg .middle } __MatchaIO API Documentation__](../api-doc/api-reference.html)
@@ -23,4 +21,10 @@ hide:
     A sample knowledgebase for a fictional payments system.
 
     `Coming soon!`
+
+-   [:simple-swagger:{ .lg .middle } __Freelance.com Projects__](../projects/freelancen8n.md)
+
+    ---
+
+    Get a list of latest Freelance.com projects based on user profile. 
 </div>

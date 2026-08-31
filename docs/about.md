@@ -6,9 +6,7 @@ hide:
 ---
 # About me
 
-I love to read when I want to learn new stuff. That's why I value a good documentation. 
-
-
+Very keen on simplifying stuff. 
 
 ## My professional journey
 
@@ -52,16 +50,55 @@ I love to read when I want to learn new stuff. That's why I value a good documen
     -   <div class="skillset">
         `Content Management Systems`{ .md-button .md-button-primary}
         `Knowledge Management`{ .md-button .md-button-primary}
+        `Google Workspace`{ .md-button .md-button-primary }
+        `Looker Studio`{ .md-button .md-button-primary }
         </div> 
 
     </div>
-
 
 === "NiCE CXone"
 
     ### Technical Writing Specialist `June 2021 – September 2023`{ .date-label}
 
+    <div class="grid cards" markdown>
+    
+    -   Participated in incident management calls to provide real-time update to customers. 
+        Worked with technical resources to transform post-incident documentation into knowledge articles.
+
+    -   <div class="skillset">
+        `Incident Documentation`{ .md-button .md-button-primary }
+        `Knowledge Management`{ .md-button .md-button-primary }
+        `ServiceNow`{ .md-button .md-button-primary }
+        `Power Automate`{ .md-button .md-button-primary }
+        `Confluence`{ .md-button .md-button-primary }
+        `AWS`{ .md-button .md-button-primary }
+        </div> 
+
+    </div>
 
 === "Vertiv"
 
     ### Engineer II, Technical Documentation `October 2013 – June 2021`{ .date-label}
+
+    <div class="grid cards" markdown>
+    
+    -   Developed and maintained technical documentation for Vertiv’s UPS and HVAC products, including:
+
+        - Product information
+        - Firmware update
+        - Installation
+        - Troubleshooting
+        - Repair and maintenance
+        - Field upgrades
+        - Preliminary RCA report
+    
+    -   <div class="skillset">
+        `HTML/CSS`{ .md-button .md-button-primary }
+        `JavaScript`{ .md-button .md-button-primary }
+        `Oxygen XML Author`{ .md-button .md-button-primary }
+        `SyncroSVN`{ .md-button .md-button-primary }
+        `Power Automate`{ .md-button .md-button-primary }
+        `Sharepoint`{ .md-button .md-button-primary }
+        `Command Line/PowerShell`{ .md-button .md-button-primary }
+        </div> 
+    </div>

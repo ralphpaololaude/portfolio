@@ -72,26 +72,3 @@ p.pfp {
   height: 200px;
   border-radius: 100px; 
 }
-
-
-
-/*
-.skillset code {
-    margin-top: px2rem(10px);
-    margin-right: px2rem(10px);
-    color: var(--md-primary-bg-color);
-
-    &:is(:focus, :hover) {
-      color: var(--md-accent-bg-color);
-      background-color: var(--md-primary-fg-color);
-      border-color: var(--md-primary-fg-color);
-      cursor: default;
-    }
-
-    &--primary {
-      color: hsla(280, 37%, 48%, 1);
-      background-color: var(--md-accent-bg-color);
-      border-color: var(--md-accent-bg-color);
-    }
-}
-*/

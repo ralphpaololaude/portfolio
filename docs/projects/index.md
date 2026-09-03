@@ -2,6 +2,7 @@
 layout: home
 hide:
   - navigation
+  - path
 ---
 
 # My sample works

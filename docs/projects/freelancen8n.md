@@ -1,9 +1,9 @@
 ---
-layout: page
+template: n8n.html
 hide:
-    - navigation
+    - toc
 ---
 
 # Get Freelance.com Projects
 
-<n8n-demo id="demo" frame="true" data-file="freelance-projects.json"></n8n-demo>
+<n8n-demo id="demo" frame="true" data-file="freelancerProjects"></n8n-demo>

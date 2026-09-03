@@ -32,19 +32,15 @@ theme:
     accent:  custom
   features:
     - navigation.tabs
-    - navigation.sections
     - navigation.path
     - navigation.indexes
     - content.tabs.link
-    - navigation.instant
-    - navigation.instant.progress
     - navigation.tracking
 
 # Extras
 extra_css:
   - stylesheets/custom.css
 extra_javascript:
-  - https://code.jquery.com/jquery-3.6.1.min.js
   - javascripts/custom.js
 
 # Markdown Extensions

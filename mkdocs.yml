@@ -77,6 +77,6 @@ nav:
   - Home: index.md
   - Projects:
     - projects/index.md
-  - Blog:
-    - blog/index.md
+    - Get Freelance.com Projects: projects/freelancen8n.md
+  - Blog: blog/index.md
   - About: about.md

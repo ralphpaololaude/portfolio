@@ -22,8 +22,3 @@ function fRemoveHeader1(){
     var header1 = document.querySelectorAll('h1');
     header1.remove()
 }
-
-
-            //alert(a.innerHTML)
-            
-            // a.addCLass('.md-button .md-button--primary')

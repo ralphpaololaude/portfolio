@@ -1,21 +1,13 @@
-fFadeInElements()
+fFadeInElements($('.hero'))
 
-function fFadeInElements(){
-    var parentBlock = document.getElementsByClassName("hero")[0];
-    fadeIn(parentBlock);
+function fFadeInElements($container) {
+  var delayStep = 100
+  let step = 0;
+  
+  $container.find('*').each(function() {
+    $(this)
+      .delay(step * delayStep)
+      .animate({ opacity: 1 }, 400);
+    step++;
+  });
 }
-
-
-function fadeIn(element) {
-  let opacity = 0;
-  element.style.opacity = 0;
-  element.style.display = "block"; // Ensure element is visible
-  const interval = setInterval(() => {
-    if (opacity >= 1) {
-      clearInterval(interval);
-    } else {
-      opacity += 0.1;
-      element.style.opacity = opacity;
-    }
-  }, 50); // Adjust timing for speed
-}   

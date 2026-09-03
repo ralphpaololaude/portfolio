@@ -42,9 +42,10 @@ theme:
 
 # Extras
 extra_css:
-  - stylesheets/extra.css
+  - stylesheets/custom.css
 extra_javascript:
-  - javascripts/extra.js
+  - https://code.jquery.com/jquery-3.6.1.min.js
+  - javascripts/custom.js
 
 # Markdown Extensions
 markdown_extensions:

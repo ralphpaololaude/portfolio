@@ -8,10 +8,10 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        -816,
-        128
+        1696,
+        -176
       ],
-      "id": "c176b57d-fbf5-4d8d-9a9c-c9b17f6d2f0b",
+      "id": "f673d75c-665b-4bf8-a365-b4f8b51d101a",
       "name": "LoopProjects",
       "notesInFlow": true,
       "notes": "Process 4 items per minute to optimize AI resource usage."
@@ -26,63 +26,17 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
       "typeVersion": 1,
       "position": [
-        -528,
-        384
+        1984,
+        80
       ],
-      "id": "d9460919-4629-4324-bc98-6407625050fd",
+      "id": "89bcdc17-36ff-4506-9dbc-234674db3563",
       "name": "Groq Chat Model",
       "credentials": {
         "groqApi": {
-          "id": "RyVFRkri5pzsawan",
+          "id": "zYP0AerXPyyQLOm8",
           "name": "Groq account"
         }
       }
-    },
-    {
-      "parameters": {
-        "jsonSchemaExample": "{\n\t\"valid\": false,\n    \"reason\": \"The project does not require the mentioned skills\",\n\t\"summary\": \"Seeking college students and teachers with extensive contacts on WhatsApp, Facebook, Instagram, and Twitter to promote and make the site go viral, preferably from the US or Europe.\",\n  \"skills\":\"Social media networking, Influencer outreach, Viral marketing, Strong communication skills\"\n}"
-      },
-      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
-      "typeVersion": 1.3,
-      "position": [
-        -384,
-        384
-      ],
-      "id": "cb3f1dd8-82bc-4602-9eb5-dcfca4d196de",
-      "name": "Structured Output Parser"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
-              "id": "6321375b-c502-4717-a2b7-caf35ffbc694",
-              "leftValue": "={{ $json.output.valid }}",
-              "rightValue": true,
-              "operator": {
-                "type": "boolean",
-                "operation": "equals"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        -192,
-        128
-      ],
-      "id": "6f9065a5-5cf9-4d09-b0e6-eb6eb5243ee4",
-      "name": "CheckIfValid"
     },
     {
       "parameters": {
@@ -90,16 +44,16 @@
         "text": "={{ $json.description }}",
         "hasOutputParser": true,
         "options": {
-          "systemMessage": "=You are the hiring manager for the project.\n\nBased on the project description:\n\n1. Comfirm if any of the following skills would apply to the project: {{ $('GetJobNames').item.json.name }}. Prepare a concise one-sentence statement for the reason for this validation.\n2. Create a two-sentence, maximum 40-words summary of the project description.\n3. Create a concise list of 5 skill requirements as mentioned in the project description."
+          "systemMessage": "=You are the hiring manager for the project.\n\nBased on the project description:\n\n1. Create a two-sentence, maximum 40-words summary of the project description.\n2. Create a concise list of 5 skill requirements as mentioned in the project description."
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        -528,
-        144
+        1984,
+        -160
       ],
-      "id": "e792c393-fa0b-49b7-93ae-028010680a71",
+      "id": "8fafb728-d0aa-4bea-a5b3-150e9d5f7cf1",
       "name": "AnalyzeProjectDetails",
       "alwaysOutputData": true,
       "retryOnFail": true,
@@ -109,13 +63,260 @@
     },
     {
       "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 8
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        256,
+        -160
+      ],
+      "id": "8121dd25-8b5d-4d60-aded-482df7e39b13",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "result.projects",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        992,
+        -176
+      ],
+      "id": "2920a1d2-cb07-493b-9a9a-d25baa2db8c4",
+      "name": "GetProjectsObject"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8be3e653-895d-4050-a9e8-418cc4164c8b",
+              "name": "title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "3670b9d1-6ccb-4b50-89cd-d563e052507e",
+              "name": "currency",
+              "value": "={{ $json.currency }}",
+              "type": "object"
+            },
+            {
+              "id": "8840697f-0be5-4cc9-8a02-ebf5c0f7a242",
+              "name": "description",
+              "value": "={{ $json.description }}",
+              "type": "string"
+            },
+            {
+              "id": "5a0417b8-7c30-4fc6-a397-9041d7439941",
+              "name": "budget",
+              "value": "={{ $json.budget }}",
+              "type": "object"
+            },
+            {
+              "id": "b958ecee-8a28-429a-b79e-1b7c7f226ee4",
+              "name": "time_submitted",
+              "value": "={{ $json.submitdate }}",
+              "type": "number"
+            },
+            {
+              "id": "f2667aaa-61bf-4a12-b66d-d2ff605b1061",
+              "name": "seo_url",
+              "value": "={{ $json.seo_url }}",
+              "type": "string"
+            },
+            {
+              "id": "cb7959df-5514-46d9-8bb4-fe1ec93a20c4",
+              "name": "id",
+              "value": "={{ $json.id }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {
+          "ignoreConversionErrors": true
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        1504,
+        -176
+      ],
+      "id": "58bd6afe-f8cf-47ce-bec0-65727be66ff4",
+      "name": "SetProjectFields"
+    },
+    {
+      "parameters": {
+        "url": "https://www.freelancer.com/api/users/0.1/self/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "jobs",
+              "value": "true"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        416,
+        -160
+      ],
+      "id": "66f3f034-7977-4197-b2ba-41953bcfa44d",
+      "name": "GetUserInfo",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "B0dXaFG7EITXVKw4",
+          "name": "Freelancer.com Header"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "result.jobs",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        576,
+        -160
+      ],
+      "id": "d8c9d73f-e4bd-45ba-8243-ec3e4b88b04e",
+      "name": "SplitJobs"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        768,
+        -160
+      ],
+      "id": "15792f7e-e528-49cb-9b4e-5307bbac572d",
+      "name": "LoopJobs"
+    },
+    {
+      "parameters": {
+        "url": "https://www.freelancer.com/api/projects/0.1/projects/active",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "languages[]",
+              "value": "en"
+            },
+            {
+              "name": "limit",
+              "value": "100"
+            },
+            {
+              "name": "full_description",
+              "value": "true"
+            },
+            {
+              "name": "job_details",
+              "value": "true"
+            },
+            {
+              "name": "jobs[]",
+              "value": "={{ $json.id }}"
+            },
+            {
+              "name": "from_time",
+              "value": "={{ $now.minus({ hours: 8 }).toUnixInteger() }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        992,
+        0
+      ],
+      "id": "e99b9475-901c-4596-adc4-279d5e58dc52",
+      "name": "GetFreelanceProjects",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "B0dXaFG7EITXVKw4",
+          "name": "Freelancer.com Header"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 3
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1152,
+        0
+      ],
+      "id": "ded02b42-5959-48ff-a9d6-7e784c9247b5",
+      "name": "Wait3Sec",
+      "webhookId": "be60ec71-56ea-4656-9da8-1284e6dc86f2"
+    },
+    {
+      "parameters": {
+        "amount": 15
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1840,
+        -64
+      ],
+      "id": "5149fe94-ef4f-408c-ac05-1e72ee407610",
+      "name": "Wait15sec",
+      "webhookId": "73fde40f-e938-4d20-9248-aa56dc52c3aa"
+    },
+    {
+      "parameters": {
+        "compare": "selectedFields",
+        "fieldsToCompare": "id",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.removeDuplicates",
+      "typeVersion": 2,
+      "position": [
+        1168,
+        -176
+      ],
+      "id": "e19b0f10-c2cc-4fec-a0b0-f0d95a50bf3a",
+      "name": "RemoveDuplicateProjects"
+    },
+    {
+      "parameters": {
         "operation": "rowNotExists",
         "dataTableId": {
           "__rl": true,
-          "value": "wH8NCef5OlRyNLLc",
+          "value": "MHUN8FgcdMD1cS5j",
           "mode": "list",
           "cachedResultName": "Freelance.com Projects",
-          "cachedResultUrl": "/projects/5bzLfTl2NeQP8DyI/datatables/wH8NCef5OlRyNLLc"
+          "cachedResultUrl": "/projects/NC2kwKbTKgoTWlaH/datatables/MHUN8FgcdMD1cS5j"
         },
         "filters": {
           "conditions": [
@@ -129,31 +330,45 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        -1152,
-        128
+        1344,
+        -176
       ],
-      "id": "cd57d7fd-fdbb-4bd6-9577-56ca9b7dee2f",
-      "name": "If row does not exist"
+      "id": "ad061a87-3e4f-45fb-b23a-c7b173736bb9",
+      "name": "CheckExistingRow"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\t\"summary\": \"Seeking college students and teachers with extensive contacts on WhatsApp, Facebook, Instagram, and Twitter to promote and make the site go viral, preferably from the US or Europe.\",\n  \"skills\":\"Social media networking, Influencer outreach, Viral marketing, Strong communication skills\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        2128,
+        80
+      ],
+      "id": "8747c987-6996-44b2-86cc-d8be517e29be",
+      "name": "ProjectSummary"
     },
     {
       "parameters": {
         "dataTableId": {
           "__rl": true,
-          "value": "wH8NCef5OlRyNLLc",
+          "value": "MHUN8FgcdMD1cS5j",
           "mode": "list",
           "cachedResultName": "Freelance.com Projects",
-          "cachedResultUrl": "/projects/5bzLfTl2NeQP8DyI/datatables/wH8NCef5OlRyNLLc"
+          "cachedResultUrl": "/projects/NC2kwKbTKgoTWlaH/datatables/MHUN8FgcdMD1cS5j"
         },
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
             "ProjectID": "={{ $('SetProjectFields').item.json.id }}",
             "ProjectTitle": "={{ $('SetProjectFields').item.json.title }}",
-            "ProjectSummary": "={{ $('CheckIfValid').item.json.output.summary }}",
-            "SubmitDate": "={{ $('SetProjectFields').item.json.time_submitted }}",
-            "Budget": "={{ $('SetProjectFields').item.json.budget.minimum }} ~ {{ $('SetProjectFields').item.json.budget.maximum }} {{ $('SetProjectFields').item.json.currency }}",
-            "ProjectURL": "=https://www.freelancer.com/projects/{{ $('SetProjectFields').item.json.seo_url }}/details ",
-            "SkillSet": "={{ $json.output.skills }}"
+            "ProjectSummary": "={{ $json.output.summary }}",
+            "SkillSet": "={{ $json.output.skills }}",
+            "Budget": "={{ $('SetProjectFields').item.json.currency.sign }}{{ $('SetProjectFields').item.json.budget.minimum }} ~ {{ $('SetProjectFields').item.json.currency.sign }}{{ $('SetProjectFields').item.json.budget.maximum }} ({{ $('SetProjectFields').item.json.currency.code }})",
+            "ProjectURL": "=https://www.freelancer.com/projects/{{ $('SetProjectFields').item.json.seo_url }}/details",
+            "Delivered": "No",
+            "SubmitDate": "={{ $('SetProjectFields').item.json.time_submitted }}"
           },
           "matchingColumns": [],
           "schema": [
@@ -163,7 +378,7 @@
               "required": false,
               "defaultMatch": false,
               "display": true,
-              "type": "number",
+              "type": "string",
               "readOnly": false,
               "removed": false
             },
@@ -198,16 +413,6 @@
               "removed": false
             },
             {
-              "id": "SubmitDate",
-              "displayName": "SubmitDate",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "readOnly": false,
-              "removed": false
-            },
-            {
               "id": "Budget",
               "displayName": "Budget",
               "required": false,
@@ -226,6 +431,26 @@
               "type": "string",
               "readOnly": false,
               "removed": false
+            },
+            {
+              "id": "Delivered",
+              "displayName": "Delivered",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "SubmitDate",
+              "displayName": "SubmitDate",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
             }
           ],
           "attemptToConvertTypes": false,
@@ -236,289 +461,11 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        32,
-        112
+        2368,
+        -176
       ],
-      "id": "e8b724d2-de02-4ade-8a8f-dc5b78400e1c",
-      "name": "Insert row"
-    },
-    {
-      "parameters": {
-        "rule": {
-          "interval": [
-            {
-              "field": "hours",
-              "hoursInterval": 8
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.scheduleTrigger",
-      "typeVersion": 1.4,
-      "position": [
-        -2592,
-        160
-      ],
-      "id": "e19a1c68-c14e-468f-8493-25757822ef22",
-      "name": "Schedule Trigger"
-    },
-    {
-      "parameters": {
-        "compare": "selectedFields",
-        "fieldsToCompare": "id",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.removeDuplicates",
-      "typeVersion": 2,
-      "position": [
-        -1328,
-        128
-      ],
-      "id": "be3bd618-4b31-4d97-b61a-c28a49714f2f",
-      "name": "Remove Duplicates"
-    },
-    {
-      "parameters": {
-        "fieldsToAggregate": {
-          "fieldToAggregate": [
-            {
-              "fieldToAggregate": "name"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.aggregate",
-      "typeVersion": 1,
-      "position": [
-        -2096,
-        0
-      ],
-      "id": "6899f1b0-e260-4136-a9c8-177b94b2af3b",
-      "name": "GetJobNames"
-    },
-    {
-      "parameters": {
-        "fieldToSplitOut": "result.projects",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.splitOut",
-      "typeVersion": 1,
-      "position": [
-        -1504,
-        128
-      ],
-      "id": "9eda213a-75d0-4452-919c-4a50a74a0d45",
-      "name": "GetProjectsObject"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "8be3e653-895d-4050-a9e8-418cc4164c8b",
-              "name": "title",
-              "value": "={{ $json.title }}",
-              "type": "string"
-            },
-            {
-              "id": "3670b9d1-6ccb-4b50-89cd-d563e052507e",
-              "name": "currency",
-              "value": "={{ $json.currency.code }}",
-              "type": "string"
-            },
-            {
-              "id": "8840697f-0be5-4cc9-8a02-ebf5c0f7a242",
-              "name": "description",
-              "value": "={{ $json.description }}",
-              "type": "string"
-            },
-            {
-              "id": "5a0417b8-7c30-4fc6-a397-9041d7439941",
-              "name": "budget",
-              "value": "={{ $json.budget }}",
-              "type": "object"
-            },
-            {
-              "id": "b958ecee-8a28-429a-b79e-1b7c7f226ee4",
-              "name": "time_submitted",
-              "value": "={{ DateTime.fromSeconds($json.time_submitted).toFormat(\"dd MMM yyyy hh:mma\") }}",
-              "type": "number"
-            },
-            {
-              "id": "f2667aaa-61bf-4a12-b66d-d2ff605b1061",
-              "name": "seo_url",
-              "value": "={{ $json.seo_url }}",
-              "type": "string"
-            },
-            {
-              "id": "cb7959df-5514-46d9-8bb4-fe1ec93a20c4",
-              "name": "id",
-              "value": "={{ $json.id }}",
-              "type": "number"
-            }
-          ]
-        },
-        "options": {
-          "ignoreConversionErrors": true
-        }
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.5,
-      "position": [
-        -992,
-        128
-      ],
-      "id": "9ddb90a4-8aa9-40c2-8fbf-723fe70a1035",
-      "name": "SetProjectFields"
-    },
-    {
-      "parameters": {
-        "url": "https://www.freelancer.com/api/users/0.1/self/",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "jobs",
-              "value": "true"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.5,
-      "position": [
-        -2432,
-        160
-      ],
-      "id": "d2634f85-aaa4-4acb-ab2a-a50c24a01558",
-      "name": "GetUserInfo",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "mY0JlQcEGLOqnSDN",
-          "name": "FreelancerHeaderAuth"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "fieldToSplitOut": "result.jobs",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.splitOut",
-      "typeVersion": 1,
-      "position": [
-        -2272,
-        160
-      ],
-      "id": "88b1f483-800f-4092-97bb-e120a5e4e914",
-      "name": "SplitJobs"
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "type": "n8n-nodes-base.splitInBatches",
-      "typeVersion": 3,
-      "position": [
-        -1728,
-        144
-      ],
-      "id": "a1841ad9-a88f-4560-a372-b531821c52a8",
-      "name": "LoopJobs"
-    },
-    {
-      "parameters": {
-        "url": "https://www.freelancer.com/api/projects/0.1/projects/active",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "languages[]",
-              "value": "en"
-            },
-            {
-              "name": "limit",
-              "value": "100"
-            },
-            {
-              "name": "full_description",
-              "value": "true"
-            },
-            {
-              "name": "job_details",
-              "value": "true"
-            },
-            {
-              "name": "jobs[]",
-              "value": "={{ $json.id }}"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.5,
-      "position": [
-        -1504,
-        304
-      ],
-      "id": "df11e85f-41b4-4801-8fcb-d50ff1ee440f",
-      "name": "GetFreelanceProjects",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "mY0JlQcEGLOqnSDN",
-          "name": "FreelancerHeaderAuth"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "amount": 3
-      },
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        -1344,
-        304
-      ],
-      "id": "89461da9-f916-409a-9d21-1c8e0d5df95c",
-      "name": "Wait3Sec",
-      "webhookId": "be60ec71-56ea-4656-9da8-1284e6dc86f2"
-    },
-    {
-      "parameters": {
-        "mode": "chooseBranch",
-        "useDataOfInput": 2
-      },
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 3.2,
-      "position": [
-        -1936,
-        144
-      ],
-      "id": "778ba41a-ef34-44e3-b97f-2ca8f300aa5d",
-      "name": "SendJobDetails",
-      "notes": "This adds the GetJobNames output into the flow to be used in the AnalyzeProjectDetails node."
-    },
-    {
-      "parameters": {
-        "amount": 15
-      },
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        -672,
-        240
-      ],
-      "id": "9f2cff8e-e913-41bf-b8b7-0ad1c804e359",
-      "name": "Wait25sec",
-      "webhookId": "73fde40f-e938-4d20-9248-aa56dc52c3aa"
+      "id": "9970be5d-0c76-4c97-b02f-489e799a4268",
+      "name": "AddProjectData"
     }
   ],
   "pinData": {},
@@ -528,7 +475,7 @@
         [],
         [
           {
-            "node": "Wait25sec",
+            "node": "Wait15sec",
             "type": "main",
             "index": 0
           },
@@ -551,44 +498,11 @@
         ]
       ]
     },
-    "Structured Output Parser": {
-      "ai_outputParser": [
-        [
-          {
-            "node": "AnalyzeProjectDetails",
-            "type": "ai_outputParser",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "AnalyzeProjectDetails": {
       "main": [
         [
           {
-            "node": "CheckIfValid",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "CheckIfValid": {
-      "main": [
-        [
-          {
-            "node": "Insert row",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "If row does not exist": {
-      "main": [
-        [
-          {
-            "node": "SetProjectFields",
+            "node": "AddProjectData",
             "type": "main",
             "index": 0
           }
@@ -606,33 +520,11 @@
         ]
       ]
     },
-    "Remove Duplicates": {
-      "main": [
-        [
-          {
-            "node": "If row does not exist",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "GetJobNames": {
-      "main": [
-        [
-          {
-            "node": "SendJobDetails",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "GetProjectsObject": {
       "main": [
         [
           {
-            "node": "Remove Duplicates",
+            "node": "RemoveDuplicateProjects",
             "type": "main",
             "index": 0
           }
@@ -665,12 +557,7 @@
       "main": [
         [
           {
-            "node": "SendJobDetails",
-            "type": "main",
-            "index": 1
-          },
-          {
-            "node": "GetJobNames",
+            "node": "LoopJobs",
             "type": "main",
             "index": 0
           }
@@ -717,18 +604,7 @@
         ]
       ]
     },
-    "SendJobDetails": {
-      "main": [
-        [
-          {
-            "node": "LoopJobs",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Wait25sec": {
+    "Wait15sec": {
       "main": [
         [
           {
@@ -738,19 +614,57 @@
           }
         ]
       ]
+    },
+    "RemoveDuplicateProjects": {
+      "main": [
+        [
+          {
+            "node": "CheckExistingRow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CheckExistingRow": {
+      "main": [
+        [
+          {
+            "node": "SetProjectFields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ProjectSummary": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AnalyzeProjectDetails",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
   "settings": {
     "executionOrder": "v1",
-    "binaryMode": "separate"
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "errorWorkflow": "3z8ttnAgZZO8fgnv",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false,
+    "timezone": "Asia/Manila"
   },
-  "versionId": "f033ae3d-6613-4026-8b7c-901d27aca191",
+  "versionId": "6dd9ea08-52ce-4a7d-87dd-e32ee0522423",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "f885b9151df35ede94af8d313c3a6ec8921283c14624b8af58903ea3717b036e"
+    "instanceId": "1bbe00a95ba43c74f1a8675eddb127a8819f12f1efd7516a1dfff34f9deb7283"
   },
   "nodeGroups": [],
-  "id": "dLymh2GdCSjDmUiG",
+  "id": "RtOh63ZOGIPjLnQ6",
   "tags": []
 }

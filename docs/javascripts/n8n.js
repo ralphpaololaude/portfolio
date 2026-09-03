@@ -14,6 +14,7 @@ function fBuildN8NComponent(data){
   $('#demo').attr({
     'workflow':data,
     'theme':'dark',
-    'frame':'true'
+    'frame':'true',
+    'tidyup':'true'
     })
 }

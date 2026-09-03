@@ -15,15 +15,7 @@ hide:
 
     A sample API documentation for a fictional MatchaIO payments and rewards system.
 
--   :simple-knowledgebase:{ .lg .middle } __Knowledgebase__
-
-    ---
-
-    A sample knowledgebase for a fictional payments system.
-
-    `Coming soon!`
-
--   [:simple-swagger:{ .lg .middle } __Freelance.com Projects__](../projects/freelancen8n.md)
+-   [:simple-n8n:{ .lg .middle } __Freelance.com Projects__](../projects/freelancen8n.md)
 
     ---
 

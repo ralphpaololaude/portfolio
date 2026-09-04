@@ -36,6 +36,7 @@ theme:
     - navigation.indexes
     - content.tabs.link
     - navigation.tracking
+    - content.code.copy
 
 # Extras
 extra_css:
@@ -66,19 +67,20 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/ralphpaololaude
-      name: ralphpaololaude on GitHub
+      name: GitHub
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/ralphpaololaude/
-      name: ralphpaololaude on LinkedIn
+      name: LinkedIn
     - icon: fontawesome/brands/instagram
       link: https://www.instagram.com/rappaolau
-      name: ralphpaololaude on LinkedIn
+      name: Instagram
 
 # Page tree
 nav:
   - Home: index.md
   - Projects:
     - projects/index.md
+    - Get Freelance.com Projects: projects/freelancen8n.md
   - Blog:
     - blog/index.md
   - About: about.md

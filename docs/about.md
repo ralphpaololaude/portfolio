@@ -6,9 +6,15 @@ hide:
 ---
 # About me
 
-Very keen on simplifying stuff. 
+I’m a technical documentation and knowledge management professional with 12 years of experience, now expanding into AI workflow automation. I enjoy simplifying complex information, learning new technologies, and building practical solutions that make my work more efficient.
 
-## My professional journey
+## Let's connect!
+
+:material-gmail:  ralphpaolo.laude@gmail.com
+
+:fontawesome-brands-linkedin-in:  [linkedin.com/in/ralphpaololaude/](https://www.linkedin.com/in/ralphpaololaude/)
+
+## My professional experience
 
 === "Myridius"
 

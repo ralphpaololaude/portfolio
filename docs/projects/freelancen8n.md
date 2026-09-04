@@ -6,20 +6,18 @@ hide:
 
 # Get Freelance.com Projects
 
-## Overview
-
-### Problem
+## Problem
 
 Having access to the latest projects from Freelancer.com is a huge advantage. The email notification is only sent daily, does not include all new projects, and provides incomplete description.
 
-### Solution
+## Solution
 
 This workflow queries all active Freelancer.com projects updated from the last eight hours. An AI agent summarizes the project description and lists required skillsets for the project. The data is stored in an n8n data table to make it accessible to multiple workflows.
 
-### Technology
+## Technology
 
 - n8n
-- REST API
+- REST API ([Freelancer.com API](https://developers.freelancer.com/docs))
 - AI Prompt
 
 ## Node Descriptions
@@ -50,4 +48,5 @@ This workflow queries all active Freelancer.com projects updated from the last e
 ## Future Improvements
 
 - Optimize query parameters and item filtering to maximize resource usage for the chat model.
-- Improve AI agent prompt as needed.
+- Add more information for the AI agent to process.
+- Refine the AI agent's prompt.

@@ -10,4 +10,4 @@ This blog contains my writing and documentation works, such as:
 - Project documentation
 - Content writing
 
-Built using Asto, based on [Astro Zen Blog by Larry Xue](https://github.com/larry-xue/astro-zen-blog) and [AstroZen](https://github.com/immois/astro-zen) by Moisés Machuca Valverde.
+Built using Asto, based on [Astro Zen Blog](https://github.com/larry-xue/astro-zen-blog) by Larry Xue and [AstroZen](https://github.com/immois/astro-zen) by Moisés Machuca Valverde.

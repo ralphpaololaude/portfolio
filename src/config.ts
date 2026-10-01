@@ -4,7 +4,7 @@ export const SITE_CONFIG: SiteConfig = {
   author: "Ralph Laude",
   specialty: ["Technical Documentation", "Workflows and Automations"],
   description:
-    "I’m a technical writer with more 12 years of experience, now expanding into AI workflow automation.",
+    "I’m a technical writer with 12+ years of experience, now expanding into AI workflow automation.",
   lang: "en",
   siteLogo: "/pfp-small.png",
   navLinks: [

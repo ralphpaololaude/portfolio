@@ -1,0 +1,18 @@
+---
+import Layout from '@layouts/BaseLayout.astro';
+import Hero from '@components/Hero.astro';
+import { SITE_CONFIG, SITE_CONTENT } from "src/config";
+
+const {
+  description,
+  specialty,
+  author,
+} = SITE_CONFIG;
+
+const {
+  hero
+} = SITE_CONTENT;
+---
+<Layout pageTitle={`Portfolio | ${author}`}>
+  <Hero author={author} description={description} specialty={specialty} skills={hero.skills} email={hero.email} cv={hero.cv} />
+</Layout>

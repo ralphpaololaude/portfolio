@@ -1,0 +1,17 @@
+---
+interface Props {
+  text: string;
+  href: string;
+}
+
+const { text, href } = Astro.props;
+---
+
+<section id={href} class="py-12">
+  <h2
+    class="font-(family-name:--font-rugged) mb-14 text-3xl font-medium tracking-tighter text-primary md:text-5xl"
+  >
+    {text}
+  </h2>
+  <slot />
+</section>

@@ -1,0 +1,40 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogPreview from '../../components/BlogPreview.astro';
+import Section from "@components/Section.astro";
+import { filterPublishedPosts } from '../../utils/posts';
+
+type ContentEntry = CollectionEntry<'blog'> | CollectionEntry<'projects'>;
+
+interface Props {
+  tag: string;
+  posts: ContentEntry[];
+}
+
+export async function getStaticPaths() {
+  const [blogPosts, projectPosts] = await Promise.all([
+    getCollection('blog'),
+    getCollection('projects'),
+  ]);
+  const posts = filterPublishedPosts([...blogPosts, ...projectPosts]);
+  const tags = [...new Set(posts.flatMap((post) => post.data.tags ?? []))];
+
+  return tags.map((tag) => ({
+    params: { tag },
+    props: {
+      tag,
+      posts: posts.filter((post) => post.data.tags?.includes(tag)),
+    },
+  }));
+}
+
+const { tag, posts } = Astro.props;
+---
+
+<BaseLayout pageTitle={`Posts | #${tag}`}>
+  <Section  text={`#${tag}`} href="projects">
+    {posts.map((post) => <BlogPreview post={post} />)}
+  </Section>
+
+</BaseLayout>

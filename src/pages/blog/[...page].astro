@@ -1,0 +1,38 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import BlogPreview from '@components/BlogPreview.astro';
+import Pagination from '@components/Pagination.astro';
+import Section from "@components/Section.astro";
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import type { GetStaticPaths, Page } from 'astro';
+import { filterPublishedPosts, sortPostsByDate } from '../../utils/posts';
+
+interface Props {
+  page: Page<CollectionEntry<'blog'>>;
+}
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = await getCollection('blog');
+  const publishedPosts = filterPublishedPosts(posts);
+  const sortedPosts = sortPostsByDate(publishedPosts);
+
+  return paginate(sortedPosts, { pageSize: 10 });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+---
+
+<BaseLayout pageTitle="Blog Posts | Ralph Laude">
+  <Section  text="Blog Posts" href="blog">
+
+    <p class="text-white mb-4 lg:text-xl">Writing about cool stuff I find. </p>
+
+    {page.data.map((post) => <BlogPreview post={post} />)}
+  </Section>
+  <Pagination
+    currentPage={page.currentPage}
+    totalPages={page.lastPage}
+    baseUrl="/blog/"
+  />
+</BaseLayout>

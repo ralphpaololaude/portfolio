@@ -1,0 +1,31 @@
+@import "tailwindcss";   
+@plugin "@tailwindcss/typography";
+
+@theme inline {
+    --color-primary: var(--color-primary-500);
+    
+    --color-primary-50: oklch(0.965 0.015 119.4);
+    --color-primary-100: oklch(0.930 0.030 119.4);
+    --color-primary-200: oklch(0.870 0.050 119.4);
+    --color-primary-300: oklch(0.790 0.065 119.4);
+    --color-primary-400: oklch(0.700 0.075 119.4);
+    --color-primary-500: oklch(0.626 0.080 119.4);
+    --color-primary-600: oklch(0.530 0.085 119.4);
+    --color-primary-700: oklch(0.440 0.080 119.4);
+    --color-primary-800: oklch(0.360 0.065 119.4);
+    --color-primary-900: oklch(0.290 0.050 119.4);
+    --color-primary-950: oklch(0.220 0.035 119.4);
+
+    --color-neutral: #6c762c;
+    --color-white: #e2e8f0;
+    --color-black: #101010;
+
+    /* Font families → font-{name} utilities */
+    --font-sans: var(--font-content);
+    --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+    --font-display: "Oswald", sans-serif;
+
+
+
+}

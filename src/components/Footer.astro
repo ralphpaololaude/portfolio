@@ -1,0 +1,26 @@
+---
+import { SITE_CONFIG } from "src/config";
+import { Icon } from "astro-icon/components";
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="md:py-6 py-4 text-center text-primary">
+  <ul class="mb-5 flex flex-wrap justify-center gap-x-5 text-xs">
+    {
+      SITE_CONFIG.socialLinks.map(({ href, icon }) => (
+        <li>
+          <a
+            href={href}
+            target="_blank"
+            class="inline-block px-4 transition-all duration-500 after:relative after:-bottom-1 hover:text-white"
+          >
+            <Icon name={icon} size="24"/>
+          </a>
+          
+        </li>
+      ))
+    }
+  </ul>
+  <p>&copy; {currentYear} {SITE_CONFIG.author}. All rights reserved.</p>
+</footer>

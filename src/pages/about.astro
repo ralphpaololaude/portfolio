@@ -1,0 +1,19 @@
+---
+import Layout from '@layouts/BaseLayout.astro';
+import Experience from '@components/Experience.astro';
+import { SITE_CONFIG, SITE_CONTENT } from "src/config";
+
+const {
+  description,
+  specialty,
+  author,
+} = SITE_CONFIG;
+
+const {
+  experience,
+  hero
+} = SITE_CONTENT;
+---
+<Layout pageTitle={`About | ${author}`}>
+  <Experience experience={experience} />
+</Layout>

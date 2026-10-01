@@ -1,0 +1,51 @@
+---
+const { file } = Astro.props;
+
+---
+
+<n8n-demo id="demo" frame="true" data-file={file}></n8n-demo>
+
+<script>
+  async function fFetchWorkflowData() {
+    const demo = document.getElementById('demo');
+    const workflowFile = demo?.getAttribute('data-file');
+
+    if (!workflowFile) {
+      return;
+    }
+
+    const dataFile = `../n8n/${workflowFile}.json`;
+
+    try {
+      const response = await fetch(dataFile, { headers: { Accept: 'application/json' } });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      const data = await response.json();
+      fBuildN8NComponent(JSON.stringify(data));
+    } catch (error) {
+      console.error('Request Failed:', error);
+    }
+  }
+
+  function fBuildN8NComponent(data: string) {
+    const demo = document.getElementById('demo');
+
+    if (!demo) {
+      return;
+    }
+
+    demo.setAttribute('workflow', data);
+    demo.setAttribute('theme', 'dark');
+    demo.setAttribute('frame', 'true');
+    demo.setAttribute('tidyup', 'true');
+  }
+
+  window.addEventListener('DOMContentLoaded', fFetchWorkflowData);
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.0.0/webcomponents-loader.js"></script>
+<script src="https://www.unpkg.com/lit@2.0.0-rc.2/polyfill-support.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@n8n_io/n8n-demo-component/n8n-demo.bundled.js"></script>

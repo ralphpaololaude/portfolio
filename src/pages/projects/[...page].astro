@@ -1,0 +1,44 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import BlogPreview from '@components/BlogPreview.astro';
+import Pagination from '@components/Pagination.astro';
+import Section from "@components/Section.astro";
+import { Icon } from "astro-icon/components";
+
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import type { GetStaticPaths, Page } from 'astro';
+import { filterPublishedPosts, sortPostsByDate } from '../../utils/posts';
+
+interface Props {
+  page: Page<CollectionEntry<'projects'>>;
+}
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = await getCollection('projects');
+  const publishedPosts = filterPublishedPosts(posts);
+  const sortedPosts = sortPostsByDate(publishedPosts);
+
+  return paginate(sortedPosts, { pageSize: 10 });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+---
+
+<BaseLayout pageTitle="Projects | Ralph Laude">
+  <Section  text="Projects" href="projects">
+    <p class="text-white mb-4 lg:text-xl">
+      Here are some of my awesome projects! Check out my <a class="text-primary-500 hover:text-primary-500/50 transition-colors"
+        href="https://github.com/ralphpaololaude" 
+        target="_blank" rel="noopener noreferrer">
+        <Icon name="github" size="24" class="inline"/> GitHub profile</a> for details!
+    </p>
+
+    {page.data.map((post) => <BlogPreview post={post} />)}
+  </Section>
+  <Pagination
+    currentPage={page.currentPage}
+    totalPages={page.lastPage}
+    baseUrl="/projects/"
+  />
+</BaseLayout>

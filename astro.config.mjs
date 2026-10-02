@@ -15,17 +15,31 @@ export default defineConfig({
     provider: fontProviders.google(),
     name: "Special Elite",
     cssVariable: "--font-rugged",
+    fallbacks: ["font-serif"],
     },
     {
     provider: fontProviders.google(),
     name: "Rubik Dirt",
-    cssVariable: "--font-header",
+    cssVariable: "--font-hero",
+    fallbacks: ["font-serif"],
     },
     {
     provider: fontProviders.google(),
-    name: "Ubuntu",
+    name: "Fira Sans",
     cssVariable: "--font-content",
     fallbacks: ["font-sans"],
+    },
+    {
+    provider: fontProviders.fontsource(),
+    name: "Adamina",
+    cssVariable: "--font-header",
+    fallbacks: ["font-serif"],
+    },
+    {
+    provider: fontProviders.fontsource(),
+    name: "Mononoki",
+    cssVariable: "--font-code",
+    fallbacks: ["font-mono"],
     },
   ],
   vite: {

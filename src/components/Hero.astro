@@ -1,6 +1,5 @@
 ---
 const { author, description, specialty, skills, email, cv } = Astro.props;
-import { Image } from 'astro:assets';
 import heroEmoji from '@images/emoji.gif?url';
 
 interface Props {
@@ -15,7 +14,7 @@ interface Props {
 ---
 
 <div class="hero flex flex-1 flex-col items-center justify-center gap-4 text-center">
-    <h1 class="font-(family-name:--font-header) text-primary font-rugged p-4 md:text-6xl text-5xl font-medium text-center">
+    <h1 class="font-(family-name:--font-hero) text-primary font-rugged p-4 md:text-6xl text-5xl font-medium text-center">
         {author}
     </h1>
     <div class="flex flex-wrap justify-center gap-2">
@@ -38,7 +37,7 @@ interface Props {
     <div class="flex flex-wrap justify-center my-8 gap-2 md:text-base text-sm">
         {
             skills.map((skill) => (
-                <span class="bg-primary-700/50 text-white px-3 py-1 rounded-full">
+                <span class="bg-primary-700/50 text-white px-3 py-1 rounded-full font-mono">
                     {skill}
                 </span>
             ))

@@ -33,15 +33,15 @@ const imageHeight = 400; // Set appropriate default height
     </a>
   )}
   <header>
-    <h2 class="text-xl font-bold mb-2">
-      <a href={`/${dirName}/${post.id}`} class="text-primary-500 dark:text-primary-400 hover:text-gray-900 dark:hover:text-primary-400 transition-all duration-200">
+    <h2 class="text-xl font-bold">
+      <a href={`/${dirName}/${post.id}`} class="font-serif text-primary-500 hover:text-white transition-all duration-200">
         {title}
       </a>
     </h2>
-    <div class="mb-4">
+    <div class="mb-6">
       <PostDate date={date} />
     </div>
   </header>
-  <p class="text-white mb-4">{description}</p>
+  <p class="text-white my-4">{description}</p>
   {tags && <PostTags tags={tags} />}
 </article>

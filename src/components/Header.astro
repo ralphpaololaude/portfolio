@@ -1,7 +1,13 @@
 ---
-import Menu from '../components/Menu.astro';
 import { SITE_CONFIG } from "src/config";
 import '../styles/global.css';
+
+const { pathname } = Astro.url;
+
+function isActive(href: string) {
+    if (href === "/") return false;
+  return pathname.startsWith(href);
+}
 
 ---
 
@@ -12,7 +18,8 @@ import '../styles/global.css';
                 <a 
                     class="font-(family-name:--font-rugged) text-lg hover:text-white md:px-12 px-7 font-medium transition-all duration-400 ease-in-out"
                     href={link.href} 
-                    >
+                    class:list={isActive(link.href) ? ['text-white', 'font-bold'] : []}
+                >
                     {link.text}
                 </a>
             ))}

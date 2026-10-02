@@ -1,9 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import Prose from '@components/Prose.astro';
 import type { CollectionEntry } from 'astro:content';
-
-import PostDate from '@components/PostDate.astro';
-import PostTags from '@components/PostTags.astro';
 
 interface Props {
     post: CollectionEntry<'blog'> | CollectionEntry<'projects'>;
@@ -13,29 +11,7 @@ const { post } = Astro.props;
 ---
 
 <BaseLayout pageTitle={`${post.collection === 'projects' ? 'Projects' : 'Blog'} | ${post.data.title}`}>
-    <div
-        class="prose prose-lg
-        prose-headings:text-primary-400
-        prose-p:text-white
-        prose-a:text-primary-600
-        prose-strong:text-primary-300
-        prose-code:text-white
-        prose-code:bg-primary-600/40
-        prose-blockquote:text-primary-700
-        prose-span:text-primary-700
-        prose-li:text-white
-        prose-td: text-white
-        my-10
-        "
-        >
-        <p class="pb-0.5 flex text-sm text-white/40 gap-2">
-            <PostDate date={post.data.date} />
-        </p>
-        <h1 class="my-5 text-primary text-4xl">{post.data.title}</h1>
-        <p class="pb-0.5 flex text-sm text-white/40 gap-2">
-            {post.data.tags && <PostTags tags={post.data.tags} />}
-        </p>
-
-        <slot/>
-        </div>
+    <Prose post={post}>
+        <slot />
+    </Prose>
 </BaseLayout>

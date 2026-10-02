@@ -14,7 +14,7 @@ const { file } = Astro.props;
       return;
     }
 
-    const dataFile = `../n8n/${workflowFile}.json`;
+    const dataFile = `${import.meta.env.BASE_URL}n8n/${workflowFile}.json`;
 
     try {
       const response = await fetch(dataFile, { headers: { Accept: 'application/json' } });

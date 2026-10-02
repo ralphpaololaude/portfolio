@@ -43,7 +43,11 @@ const { file } = Astro.props;
     demo.setAttribute('tidyup', 'true');
   }
 
-  window.addEventListener('DOMContentLoaded', fFetchWorkflowData);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fFetchWorkflowData, { once: true });
+  } else {
+    fFetchWorkflowData();
+  }
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.0.0/webcomponents-loader.js"></script>

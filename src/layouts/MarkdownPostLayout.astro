@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Prose from '@components/Prose.astro';
+import BackToTop from '@components/BackToTop.astro';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -14,4 +15,5 @@ const { post } = Astro.props;
     <Prose post={post}>
         <slot />
     </Prose>
+    <BackToTop />
 </BaseLayout>

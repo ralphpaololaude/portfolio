@@ -1,0 +1,36 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<div class="flex flex-col items-center fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+    <button
+  id="back-to-top"
+  class="border-t border-primary-300/60 flex items-center backdrop-blur-xs flex-col px-8 py-1 bg-black/50 text-primary-300 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 z-50"
+  aria-label="Scroll to top"
+    >
+   <Icon name="top" />
+</button>
+</div>
+
+<script>
+  const button = document.getElementById('back-to-top');
+  
+  if (button) {
+    const toggleVisibility = () => {
+      if (window.scrollY > 300) {
+        button.classList.remove('opacity-0', 'invisible');
+        button.classList.add('opacity-100', 'visible');
+      } else {
+        button.classList.add('opacity-0', 'invisible');
+        button.classList.remove('opacity-100', 'visible');
+      }
+    };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  window.addEventListener('scroll', toggleVisibility);
+  button.addEventListener('click', scrollToTop);
+}
+</script>   

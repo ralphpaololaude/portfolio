@@ -11,12 +11,12 @@ function isActive(href: string) {
 
 ---
 
-<header class="shadow-md md:top-0 md:z-50 bg-black">
-    <nav class="text-primary flex justify-center p-5">
+<header class="sticky top-0 shadow-md z-50 bg-black">
+    <nav class="text-primary flex justify-center p-4">
         <div id="main-menu" class="flex text-primary">
             {SITE_CONFIG.navLinks.map((link) => (
                 <a 
-                    class="font-(family-name:--font-rugged) text-lg hover:text-white md:px-12 px-7 font-medium transition-all duration-400 ease-in-out"
+                    class="font-(family-name:--font-rugged) text-lg hover:text-white md:px-12 px-4 font-medium transition-all duration-400 ease-in-out"
                     href={link.href} 
                     class:list={isActive(link.href) ? ['text-white', 'font-bold'] : []}
                 >

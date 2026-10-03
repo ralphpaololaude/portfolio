@@ -6,7 +6,7 @@ const currentYear = new Date().getFullYear();
 ---
 
 <footer class="md:py-6 py-4 text-center text-primary font-mono">
-  <ul class="mb-5 flex flex-wrap justify-center gap-x-5 text-xs">
+  <ul class="md:mb-5 mb-4 flex flex-wrap justify-center gap-x-5 text-xs">
     {
       SITE_CONFIG.socialLinks.map(({ href, icon }) => (
         <li>
@@ -23,5 +23,5 @@ const currentYear = new Date().getFullYear();
       ))
     }
   </ul>
-  <p>&copy; {currentYear} {SITE_CONFIG.author}. All rights reserved.</p>
+  <p>&copy;{currentYear} {SITE_CONFIG.author}. All rights reserved.</p>
 </footer>

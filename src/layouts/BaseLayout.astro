@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import { Font } from "astro:assets";
-import { ClientRouter, slide } from 'astro:transitions';
+import { ClientRouter, fade } from 'astro:transitions';
 
 const { pageTitle } = Astro.props
 import Header from '@components/Header.astro';
@@ -31,7 +31,7 @@ import BackToTop from '@components/BackToTop.astro';
   <body class="bg-black">
     <div class="min-h-screen flex flex-col max-w-3xl mx-auto px-4 sm:px-6">
     <Header transition:persist />
-    <main class="flex flex-1 flex-col gap-8" transition:animate={slide({ duration: '.3s' })}>
+    <main class="flex flex-1 flex-col gap-8" transition:animate={fade({ duration: '.4s' })}>
       <slot />
     </main>
     <BackToTop/>

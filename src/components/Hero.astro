@@ -1,5 +1,5 @@
 ---
-const { author, description, specialty, skills, email, cv } = Astro.props;
+const { author, description, specialty, skills, tools, email, cv } = Astro.props;
 import heroEmoji from '@images/emoji.gif?url';
 
 interface Props {
@@ -7,6 +7,7 @@ interface Props {
     specialty: string | string[];
     description: string;
     skills: string[];
+    tools: string[];
     email: string;
     cv: string;
     }
@@ -20,7 +21,7 @@ interface Props {
     <div class="flex flex-wrap justify-center gap-2">
         {Array.isArray(specialty) ? (
             specialty.map((item) => (
-                <h3 class="font-(family-name:--font-rugged) text-primary text-xl px-3 py-1">
+                <h3 class="font-(family-name:--font-rugged) text-primary text-xl p-1">
                     {item}
                 </h3>
             ))
@@ -33,12 +34,21 @@ interface Props {
     <p class="text-white md:text-base text-sm">
         {description}
     </p>
-    <p><img src={heroEmoji} alt="emoji" /></p>
-    <div class="flex flex-wrap justify-center my-8 gap-2 md:text-base text-sm">
+    <p class="m-5"><img src={heroEmoji} alt="emoji" /></p>
+    <div class="flex flex-wrap justify-center mt-8 gap-1 md:text-sm text-xs">
         {
             skills.map((skill) => (
                 <span class="bg-primary-700/50 text-white px-3 py-1 rounded-full font-mono">
                     {skill}
+                </span>
+            ))
+        }
+    </div>
+    <div class="flex flex-wrap justify-center mb-8 gap-1 md:text-sm text-xs">
+        {
+            tools.map((tool) => (
+                <span class="bg-complement/50 text-white px-3 py-1 rounded-full font-mono">
+                    {tool}
                 </span>
             ))
         }

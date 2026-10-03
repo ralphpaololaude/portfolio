@@ -2,11 +2,9 @@ import type { SiteConfig, SiteContent } from "./types";
 
 export const SITE_CONFIG: SiteConfig = {
   author: "Ralph Laude",
-  specialty: ["Technical Documentation", "Workflows and Automations"],
   description:
     "I’m a technical writer with 12+ years of experience, now expanding into AI workflow automation.",
   lang: "en",
-  siteLogo: "/pfp-small.png",
   navLinks: [
     { text: "Home", href: "/" },
     { text: "Projects", href: "/projects" },
@@ -23,12 +21,12 @@ export const SITE_CONFIG: SiteConfig = {
 export const SITE_CONTENT: SiteContent = {
   hero: {
     name: "Ralph Laude",
-    specialty: "Technical Documentation and Automations",
-    summary:
-      "I’m a technical documentation and knowledge management professional with more than 12 years of experience, now expanding into AI workflow automation.",
+    specialty: ["Technical Documentation", "AI Workflow Automation"],
+    summary: "I’m a technical writer with 12+ years of experience, now expanding into AI workflow automation.",
     email: "ralphpaolo.laude@gmail.com",
     cv: "ralphlaude_cv.pdf",
-    skills: ["Technical Writing", "Knowledge Management", "AI Workflow Automation", "n8n", "Zapier", "Make.com", "Python", "JavaScript", "Astro"],
+    skills: ["Technical Writing", "API Documentation", "AI-assisted Workflows", "RPA", "Knowledge Management", "CMS", "Agile", ],
+    tools: ["n8n", "Zapier", "Make.com", "Power Automate", "Python", "JavaScript", "Astro", "Git/GitHub", "Markdown", "Adobe Experience Manager", "IntelliJ IDEA", "Postman"],
   },
   experience: [
     {
@@ -77,32 +75,5 @@ export const SITE_CONTENT: SiteContent = {
         "Created automation flows that reduce code migration efforts by 80%, enhancing efficiency and productivity.",
       ]
       },
-  ],
-  projects: [
-    {
-      name: "MatchaIO API Documentation",
-      summary: "A sample API documentation for a fictional MatchaIO payments and rewards system.",
-      projectLinks: [
-        { href: "https://blog.ralphlaude.com/blog/matchaio-api-documentation/", text: "API Reference" },
-        { href: "https://github.com/ralphpaololaude/blog/blob/main/docs/blog/openapi/matchaio_openapi.yaml", text: "YAML File" },
-      ],
-      image: "/matchaio.png",
-    },
-    {
-      name: "Freelance.com Projects Collector",
-      summary: "An n8n workflow that regularly collects and stores projects from Freelance.com for downstream workflow use.",
-      projectLinks: [
-        { href: "https://blog.ralphlaude.com/blog/get-freelancecom-projects/", text: "Documentation" },
-        { href: "https://github.com/ralphpaololaude/blog/blob/main/docs/blog/n8n/freelancerProjects.json", text: "n8n JSON File" },
-      ],
-      image: "/getflproj.png",
-    },
-  ],
-  about: {
-    description: [
-      "I’m a technical documentation and knowledge management professional with 12 years of experience, now expanding into AI workflow automation.",
-      "I enjoy simplifying complex information, learning new technologies, and building practical solutions that make my work more efficient."
-    ],
-    image: "/pfp.png",
-  },
+  ]
 };

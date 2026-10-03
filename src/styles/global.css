@@ -19,6 +19,7 @@
     --color-neutral: #6c762c;
     --color-white: #e2e8f0;
     --color-black: #101010;
+    --color-complement: oklch(0.450 0.110 299.4);
 
     /* Font families → font-{name} utilities */
     --font-sans: var(--font-content);

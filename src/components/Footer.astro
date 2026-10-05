@@ -6,14 +6,14 @@ const currentYear = new Date().getFullYear();
 ---
 
 <footer class="md:py-6 py-4 text-center text-primary font-mono">
-  <ul class="md:mb-5 mb-4 flex flex-wrap justify-center gap-x-5 text-xs">
+  <ul class="mb-2 flex flex-wrap justify-center gap-x-5 text-xs">
     {
       SITE_CONFIG.socialLinks.map(({ href, icon }) => (
         <li>
           <a
             href={href}
             target="_blank"
-            class="inline-block px-4 transition-all duration-500 after:relative after:-bottom-1 hover:text-white"
+            class="inline-block px-4 transition-all duration-500 after:relative after:-bottom-1 hover:text-complement"
             aria-label={`Link to ${icon} profile`}
           >
             <Icon name={icon} size="24"/>
@@ -23,5 +23,5 @@ const currentYear = new Date().getFullYear();
       ))
     }
   </ul>
-  <p>&copy;{currentYear} {SITE_CONFIG.author}. All rights reserved.</p>
+  <p>&copy;{currentYear} {SITE_CONFIG.author}</p>
 </footer>

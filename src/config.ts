@@ -8,8 +8,8 @@ export const SITE_CONFIG: SiteConfig = {
   navLinks: [
     { text: "Home", href: "/" },
     { text: "Projects", href: "/projects" },
-    { text: "Blog", href: "/blog" },
     { text: "About", href: "/about" },
+    { text: "Blog", href: "/blog" },
   ],
   socialLinks: [
     { href: "https://www.instagram.com/rappaolau/", icon: "instagram" },
@@ -21,12 +21,11 @@ export const SITE_CONFIG: SiteConfig = {
 export const SITE_CONTENT: SiteContent = {
   hero: {
     name: "Ralph Laude",
-    specialty: ["Technical Documentation", "AI Workflow Automation"],
-    summary: "I’m a technical writer with 12+ years of experience, now expanding into AI workflow automation.",
+    summary: "I'm a technical writer with 12+ years of experience in software and enterprise systems, now building AI-powered workflow automations that connect APIs, data, and business processes.",
     email: "ralphpaolo.laude@gmail.com",
     cv: "ralphlaude_cv.pdf",
-    skills: ["Technical Writing", "API Documentation", "AI-assisted Workflows", "RPA", "Knowledge Management", "CMS", "Agile", ],
-    tools: ["n8n", "Zapier", "Make.com", "Power Automate", "Python", "JavaScript", "Astro", "Git/GitHub", "Markdown", "Adobe Experience Manager", "IntelliJ IDEA", "Postman"],
+    skills: ["Technical Writing", "API Documentation", "AI Workflow Automation", "Knowledge Management", ],
+    tools: ["n8n", "Zapier", "Make.com", "Power Automate", "Python", "JavaScript", "Astro", "Git", "CMS", "Adobe Experience Manager", "IntelliJ IDEA", "Postman", "Agile"],
   },
   experience: [
     {

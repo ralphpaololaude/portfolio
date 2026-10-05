@@ -12,7 +12,6 @@ export interface SiteContent {
 
 export interface HeroProps {
   name: string;
-  specialty: string | string[];
   summary: string;
   email: string;
   skills: string[];

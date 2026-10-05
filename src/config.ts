@@ -24,7 +24,7 @@ export const SITE_CONTENT: SiteContent = {
     summary: "I'm a technical writer with 12+ years of experience in software and enterprise systems, now building AI-powered workflow automations that connect APIs, data, and business processes.",
     email: "ralphpaolo.laude@gmail.com",
     cv: "ralphlaude_cv.pdf",
-    skills: ["Technical Writing", "API Documentation", "AI Workflow Automation", "Knowledge Management", ],
+    skills: ["Technical Writing ● API Documentation ● AI Workflow Automation ● Knowledge Management", ],
     tools: ["n8n", "Zapier", "Make.com", "Power Automate", "Python", "JavaScript", "Astro", "Git", "CMS", "Adobe Experience Manager", "IntelliJ IDEA", "Postman", "Agile"],
   },
   experience: [

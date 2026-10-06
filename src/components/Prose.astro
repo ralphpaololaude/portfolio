@@ -21,13 +21,18 @@ import PostTags from '@components/PostTags.astro';
     my-10
     "
     >
-    <p class="pb-0.5 flex text-sm text-white/40 gap-2">
+    <p class="pb-0.5 flex text-sm gap-2">
         <PostDate date={post.data.date} />
     </p>
     <h1 class="my-5 text-primary text-4xl">{post.data.title}</h1>
     <p class="pb-0.5 flex text-sm text-white/40 gap-2">
         {post.data.tags && <PostTags tags={post.data.tags} />}
     </p>
+    {post.collection === 'projects' && (
+        <div>
+            <p class="text-white">{post.data.description}</p>
+        </div>
+    )}
 
     <slot/>
 </div>

@@ -1,11 +1,12 @@
 ---
 title: "Freelance.com Projects Collector"
-description: "An n8n workflow that collects latest active Freelancer.com projects."
+description: "An automated job-discovery pipeline that retrieves Freelancer projects, processes and summarizes them with AI, and distributes relevant opportunities through Slack and email."
 date: 2026-09-03
-tags: ["projects", "n8n", "automation"]
+tags: ["n8n", "ai-automation", "api-integration"]
 ---
 
 import Workflow from '@components/Workflow.astro'
+
 
 ## Problem
 
@@ -15,11 +16,15 @@ Having access to the latest projects from Freelancer.com is a huge advantage. Th
 
 This workflow queries all active Freelancer.com projects updated from the last eight hours. An AI agent summarizes the project description and lists required skillsets for the project. The data is stored in an n8n data table to make it accessible to multiple workflows.
 
-## Technology
+## Tech Stack
 
 - n8n
 - REST API ( [Freelancer.com API](https://developers.freelancer.com/docs) )
 - AI Prompt
+
+## Workflow Diagram
+
+
 
 ## Node Descriptions
 

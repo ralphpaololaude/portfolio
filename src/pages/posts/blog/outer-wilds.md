@@ -13,9 +13,9 @@ My curiosity got the better of me and I searched for more videos about the game.
 
 The game was Outer Wilds. Released in 2019, it received overwhelmingly positive reviews from critics and players alike. I quickly got the Archaeologist version for my Nintendo Switch.
 
-!!! warning "Spoiler Warning"
-
-    This article contains details about the gameplay and story of Outer Wilds.
+    !!! Spoiler Warning !!!
+    
+    This article contains details about the gameplay and story of Outer Wilds. 
 
 ![Campfire](https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmJpbnVlZmkwb3h3bno5aWJrYXN4bzh6NHhlODZ1aWYwd3R5dmpqNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/BxAgRV0lC3QnufNviv/giphy.gif)
 

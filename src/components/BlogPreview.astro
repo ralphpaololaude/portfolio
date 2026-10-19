@@ -17,7 +17,7 @@ const imageWidth = 800; // Set appropriate default width
 const imageHeight = 400; // Set appropriate default height
 ---
 
-<article class="my-8 p-6 rounded-2xl border border-neutral/20">
+<article  class="bg-surface my-8 p-6 rounded-2xl border border-secondary">
   {
   image && (
     <a href={`/${dirName}/${post.id}`} class="block mb-4">
@@ -34,13 +34,13 @@ const imageHeight = 400; // Set appropriate default height
   )}
   <header>
     <h2 class="text-2xl font-bold">
-      <a href={`/${dirName}/${post.id}`} class="font-serif text-primary-500 hover:text-white transition-all duration-200">
+      <a href={`/${dirName}/${post.id}`} class="font-serif text-primary hover:text-foreground transition-all duration-200">
         {title}
       </a>
     </h2>
   {tags && <PostTags tags={tags} />}
   </header>
-  <p class="text-white mt-8">{description}</p>
+  <p class="text-foreground mt-8">{description}</p>
     {post.collection === 'blog' && (
     <div class="mt-6">
       <PostDate date={date} />

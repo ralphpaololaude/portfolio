@@ -28,14 +28,14 @@ import BackToTop from '@components/BackToTop.astro';
     <title>{pageTitle}</title>
   </head>
 
-  <body class="bg-black">
-    <div class="min-h-screen flex flex-col max-w-3xl mx-auto px-4 sm:px-6">
+  <body class="bg-background">
     <Header transition:persist />
+    <div class="min-h-screen flex flex-col max-w-3xl mx-auto px-4 sm:px-6">
     <main class="flex flex-1 flex-col gap-8" transition:animate={slide({ duration: '.3s' })}>
       <slot />
     </main>
     <BackToTop/>
-    <Footer transition:persist />
     </div>
+    <Footer transition:persist />
   </body>
 </html>

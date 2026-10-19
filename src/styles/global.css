@@ -2,24 +2,22 @@
 @plugin "@tailwindcss/typography";
 
 @theme inline {
-    --color-primary: var(--color-primary-500);
-    
-    --color-primary-50: oklch(0.965 0.015 119.4);
-    --color-primary-100: oklch(0.930 0.030 119.4);
-    --color-primary-200: oklch(0.870 0.050 119.4);
-    --color-primary-300: oklch(0.790 0.065 119.4);
-    --color-primary-400: oklch(0.700 0.075 119.4);
-    --color-primary-500: oklch(0.626 0.080 119.4);
-    --color-primary-600: oklch(0.530 0.085 119.4);
-    --color-primary-700: oklch(0.440 0.080 119.4);
-    --color-primary-800: oklch(0.360 0.065 119.4);
-    --color-primary-900: oklch(0.290 0.050 119.4);
-    --color-primary-950: oklch(0.220 0.035 119.4);
+    /* Backgrounds and surfaces */
+    --color-background: oklch(20.46% 0 0);
+    --color-surface: oklch(25.31% 0.0044 196.88);
 
-    --color-neutral: #6c762c;
-    --color-white: #e2e8f0;
-    --color-black: #101010;
-    --color-complement: oklch(0.450 0.110 299.4);
+    /* Primary - Sage green */
+    --color-primary: oklch(79.23% 0.0838 120.99);
+    --color-primary-muted: oklch(63.10% 0.0777 121.30);
+
+    /* Secondary - Muted purple */
+    --color-secondary: oklch(32.63% 0.0363 302.73);
+    --color-secondary-foreground: oklch(88.52% 0.0342 304.51);
+
+    /* Typography */
+    --color-foreground: oklch(92.76% 0.0058 264.53);
+    --color-foreground-muted: oklch(73.73% 0.0123 264.49);
+    --color-footer: oklch(63.37% 0.0114 248.01);
 
     /* Font families → font-{name} utilities */
     --font-sans: var(--font-content);

@@ -6,18 +6,18 @@ import PostTags from '@components/PostTags.astro';
 
 <div
     class="prose prose-lg
-    prose-headings:text-primary-400
+    prose-headings:text-primary
     prose-headings:font-serif
-    prose-p:text-white
-    prose-a:text-primary-600
-    prose-strong:text-primary-300
-    prose-code:text-white
+    prose-p:text-foreground
+    prose-a:text-primary
+    prose-strong:text-primary
+    prose-code:text-foreground
     prose-code:text-wrap
-    prose-blockquote:text-primary-700
+    prose-blockquote:text-primary
     prose-pre:prose-code:text-primary
-    prose-span:text-primary-700
-    prose-li:text-white
-    prose-td: text-white
+    prose-span:text-primary
+    prose-li:text-foreground
+    prose-td: text-foreground
     my-10
     "
     >
@@ -25,12 +25,12 @@ import PostTags from '@components/PostTags.astro';
         <PostDate date={post.data.date} />
     </p>
     <h1 class="my-5 text-primary text-4xl">{post.data.title}</h1>
-    <p class="pb-0.5 flex text-sm text-white/40 gap-2">
+    <p class="pb-0.5 flex text-sm text-foreground/40 gap-2">
         {post.data.tags && <PostTags tags={post.data.tags} />}
     </p>
     {post.collection === 'projects' && (
         <div>
-            <p class="text-white">{post.data.description}</p>
+            <p class="text-foreground">{post.data.description}</p>
         </div>
     )}
 

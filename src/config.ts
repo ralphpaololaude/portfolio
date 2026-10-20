@@ -67,12 +67,19 @@ export const SITE_CONTENT: SiteContent = {
     {
       company: "Vertiv",
       position: "Engineer II - Technical Documentation",
-      startDate: "Jun 2021",
-      endDate: "Sep 2023",
+      startDate: "Oct 2013",
+      endDate: "Jun 2021",
       summary: [
         "Developed and maintained technical documentation for Vertiv’s UPS and HVAC products, including installation, repair, maintenance and upgrade procedures.",
         "Created automation flows that reduce code migration efforts by 80%, enhancing efficiency and productivity.",
       ]
       },
-  ]
+  ],
+  about: {
+    summary: ["I'm Ralph. I'm an experienced technical documentation professional, having written and maintained software documentation, knowledge bases, and UPS/HVAC system service procedures.",
+      "My habit of finding ways to make my job easier led me to automation workflows.",
+      "What started with simple ones that fetch email attachments and organize my cloud drives evolved into complex structures transferring data via APIs and webhooks, analyzed and improved by AI, or stored in a cloud database.",
+      "Curious about what I can do? Explore my projects to see my work in action, and if you have an idea, a challenge, or an opportunity to collaborate, let's connect and build something great together!"
+    ]
+  }
 };

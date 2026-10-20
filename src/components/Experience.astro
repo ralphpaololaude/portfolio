@@ -1,6 +1,7 @@
 ---
 import Section from "./Section.astro";
-import type { ExperienceProps } from "@types";
+import type { ExperienceProps, AboutProps } from "@types";
+import { Icon } from "astro-icon/components";
 
 interface Props {
   experience: ExperienceProps[];
@@ -8,34 +9,51 @@ interface Props {
 
 const { experience } = Astro.props;
 ---
-
 <Section text="Work Experience" href="experience">
-  {
-    experience.map(({ company, position, startDate, endDate, summary }) => (
-      <div class="bg-surface my-8 p-6 rounded-2xl ring-1 ring-primary-muted/30">
-        <h3 class="mb-1.5 font-serif text-2xl font-semibold text-foreground">
-          {company}
-        </h3>
-        <div class="flex flex-col items-start pb-5">
-          <h4 class="mb-0.5 font-mono text-xl font-medium text-primary">
-            {position}
-          </h4>
-          <span class="pb-0.5 text-sm text-foreground-muted">
-            {startDate} — {endDate}
-          </span>
+  <div class="relative">
+    <div
+      aria-hidden="true"
+      class="absolute bottom-0 left-3 top-0 w-0.5 -translate-x-1/2 bg-primary/50 hidden md:flex"
+    ></div>
+    {
+      experience.map(({ company, position, startDate, endDate, summary }, index) => (
+        <div class="flex items-center">
+          <div class="text-primary left-0 hidden md:flex">
+              <Icon name="experience" size="24"/>
+          </div>
+          <div class="m-5 text-sm text-foreground-muted">
+              <p class="mx-auto">
+                {startDate}
+              </p>
+              <p class="mx-auto">
+                {index === 0 && ` to ${endDate}`}
+              </p>
+          </div>
+          <div
+            class="bg-surface relative my-8 w-4/5 rounded-2xl p-6 ring-1 ring-primary-muted/30 ml-auto"
+          >
+            <h3 class="mb-1.5 font-serif text-2xl font-semibold text-foreground">
+              {company}
+            </h3>
+            <div class="flex flex-col items-start pb-5">
+              <h4 class="mb-0.5 font-mono text-xl font-medium text-primary">
+                {position}
+              </h4>
+            </div>
+            {Array.isArray(summary) ? (
+              <ul class="list-none">
+                {summary.map((log) => (
+                  <li class="relative mb-3 text-base text-foreground">
+                    {log}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p class="text-base text-foreground">{summary}</p>
+            )}
+          </div>
         </div>
-        {Array.isArray(summary) ? (
-          <ul class="list-none">
-            {summary.map((log) => (
-              <li class="relative mb-3 text-base text-foreground">
-                {log}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p class="text-base text-foreground">{summary}</p>
-        )}
-      </div>
-    ))
-  }
+      ))
+    }
+  </div>
 </Section>

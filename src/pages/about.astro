@@ -1,19 +1,19 @@
 ---
 import Layout from '@layouts/BaseLayout.astro';
 import Experience from '@components/Experience.astro';
+import About from '@components/About.astro';
 import { SITE_CONFIG, SITE_CONTENT } from "src/config";
 
 const {
-  description,
-  specialty,
   author,
 } = SITE_CONFIG;
 
 const {
   experience,
-  hero
+  about
 } = SITE_CONTENT;
 ---
 <Layout pageTitle={`About | ${author}`}>
-  <Experience experience={experience} />
+  <About about={about}/>
+  <Experience experience={experience}/>
 </Layout>

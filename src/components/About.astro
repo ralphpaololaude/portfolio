@@ -1,0 +1,28 @@
+---
+import Section from "./Section.astro";
+import Socials from "@components/Socials.astro";
+import type { AboutProps } from "@types";
+import heroEmoji from '@images/emoji.gif?url';
+
+interface Props {
+  about: AboutProps;
+}
+
+const { about } = Astro.props;
+---
+
+<Section text="Heya!" href="me">
+  {
+    Array.isArray(about.summary) ? (
+      about.summary.map((paragraph) => (
+        <p class="md:text-base text-lg text-foreground py-2">{paragraph}</p>
+      ))
+    ) : (
+      <p class="md:text-base text-lg text-foreground py-2">{about.summary}</p>
+    )
+  }
+  <div class="md:mt-8 mt-8 flex flex-col items-center">
+    <p class=""><img src={heroEmoji} alt="emoji" /></p>
+    <Socials />
+  </div>
+</Section>

@@ -8,6 +8,7 @@ export interface SiteConfig extends HeaderProps {
 export interface SiteContent {
   hero: HeroProps;
   experience: ExperienceProps[];
+  about: AboutProps;
 }
 
 export interface HeroProps {
@@ -27,6 +28,11 @@ export interface ExperienceProps {
   summary: string | string[];
 }
 
+export interface AboutProps {
+  summary: string | string[];
+}
+
 export interface HeaderProps {
   navLinks: { text: string; href: string }[];
 }
+

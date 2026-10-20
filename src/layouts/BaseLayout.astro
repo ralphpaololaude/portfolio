@@ -4,6 +4,7 @@ import { Font } from "astro:assets";
 import { ClientRouter, slide } from 'astro:transitions';
 
 const { pageTitle } = Astro.props
+const isHomePage = Astro.url.pathname === '/';
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 import BackToTop from '@components/BackToTop.astro';
@@ -28,13 +29,13 @@ import BackToTop from '@components/BackToTop.astro';
     <title>{pageTitle}</title>
   </head>
 
-  <body class="bg-background">
+  <body class:list={['bg-background flex flex-col', isHomePage ? 'h-dvh overflow-hidden' : 'min-h-screen']}>
     <Header transition:persist />
-    <div class="min-h-screen flex flex-col max-w-3xl mx-auto px-4 sm:px-6">
-    <main class="flex flex-1 flex-col gap-8" transition:animate={slide({ duration: '.3s' })}>
-      <slot />
-    </main>
-    <BackToTop/>
+    <div class="flex flex-1 min-h-0 flex-col max-w-3xl w-full mx-auto px-4 sm:px-6">
+      <main class="flex flex-1 min-h-0 flex-col gap-8" transition:animate={slide({ duration: '.3s' })}>
+        <slot />
+      </main>
+      <BackToTop />
     </div>
     <Footer transition:persist />
   </body>

@@ -12,7 +12,7 @@ const { experience } = Astro.props;
 <Section text="Work Experience" href="experience">
   {
     experience.map(({ company, position, startDate, endDate, summary }) => (
-      <div class="bg-surface my-8 p-6 rounded-2xl border border-secondary">
+      <div class="bg-surface my-8 p-6 rounded-2xl ring-1 ring-primary-muted/30">
         <h3 class="mb-1.5 font-serif text-2xl font-semibold text-foreground">
           {company}
         </h3>

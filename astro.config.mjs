@@ -9,7 +9,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [preact(), icon(), mdx()],
+    integrations: [preact({ compat: true }), icon(), mdx()],
   fonts: [
     {
     provider: fontProviders.google(),

@@ -13,6 +13,7 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["src/components/*"],
+      "@ui/*": ["src/components/components/ui/*"],
       "@layouts/*": ["src/layouts/*"],
       "@icons/*": ["src/icons/*"],
       "@images/*": ["src/assets/images/*"],

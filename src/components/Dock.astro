@@ -1,0 +1,132 @@
+---
+import { SITE_CONFIG } from "src/config";
+import '../styles/global.css';
+import { Dock, DockIcon } from '@ui/dock';
+import { Icon } from "astro-icon/components";
+
+
+
+const { pathname } = Astro.url;
+
+function isActive(href: string) {
+    if (href === "/") return false;
+    return pathname.startsWith(href);
+}
+
+---
+
+<div class="sticky bottom-10 z-50 px-5 py-3 gap-4">
+    <Dock
+        client:load
+    >
+        {SITE_CONFIG.navLinks.map((link) => (
+        <DockIcon className="md:!h-auto md:!w-auto md:!p-0 md:aspect-auto">
+                    <a 
+                class="group relative flex h-full w-full items-center justify-center whitespace-nowrap font-(family-name:--font-rugged) text-lg text-primary hover:text-foreground font-medium transition-all duration-400 ease-in-out md:h-auto md:w-auto md:px-3 md:py-2"
+                    href={link.href} 
+                    aria-label={link.text}
+                    class:list={isActive(link.href) ? ['text-secondary-foreground', 'font-bold'] : []}
+                >
+                <Icon name={link.text.toLowerCase()} size="30" class="md:hidden"/>
+                <span class="hidden md:inline">{link.text}</span>
+                    <span
+                        aria-hidden="true"
+                    class="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-background px-2 py-1 text-sm text-foreground opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100 md:hidden"
+                    >
+                        {link.text}
+                    </span>
+                </a>
+            </DockIcon>
+        ))}
+        {pathname === "/" && SITE_CONFIG.socialLinks.map(({ href, icon }, index) => (
+            <DockIcon
+                className={index === 0
+                    ? "relative flex h-full w-full animate-social-fade items-center justify-center text-primary transition-colors hover:text-foreground before:absolute before:-left-1 before:top-1/2 before:h-8 before:w-px before:-translate-y-1/2 before:rounded-full before:bg-primary/50 before:content-['']"
+                    : "relative flex h-full w-full animate-social-fade items-center justify-center text-primary transition-colors hover:text-foreground"}
+            >
+                <a
+                    href={href}
+                    target="_blank"
+                    class="group relative flex h-full w-full items-center justify-center text-primary transition-colors hover:text-foreground"
+                    aria-label={`Link to ${icon} profile`}
+                >
+                    <Icon name={icon} size="30"/>
+                    <span
+                        aria-hidden="true"
+                        class="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-background px-2 py-1 text-sm text-foreground opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
+                    >
+                        {icon}
+                    </span>
+                </a>
+            </DockIcon>
+        ))
+        }
+
+        <DockIcon className="back-to-top-dock-icon relative hidden opacity-0 pointer-events-none !w-0 !h-0 !p-0 -ml-2 transition-[opacity,width,height,padding,margin] duration-300 before:absolute before:-left-1 before:top-1/2 before:h-8 before:w-px before:-translate-y-1/2 before:rounded-full before:bg-primary/50 before:content-['']">
+            <button
+                id="back-to-top"
+                type="button"
+                class="group absolute left-1/2 top-1/2 flex h-[30px] w-[30px] -translate-x-1/2 -translate-y-1/2 items-center justify-center text-primary transition-colors hover:text-foreground cursor-pointer"
+                aria-label="Scroll to top"
+            >
+                <Icon name="top" size="24"/>
+                <span
+                    aria-hidden="true"
+                    class="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-background px-2 py-1 text-sm text-foreground opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
+                >
+                    Back to top
+                </span>
+            </button>
+        </DockIcon>
+    </Dock>
+</div>
+
+<script>
+    let hideTimeout: number | undefined;
+
+    const setVisible = (dockIcon: Element, visible: boolean) => {
+        dockIcon.classList.toggle('opacity-0', !visible);
+        dockIcon.classList.toggle('opacity-100', visible);
+        dockIcon.classList.toggle('pointer-events-none', !visible);
+        dockIcon.classList.toggle('!w-0', !visible);
+        dockIcon.classList.toggle('!h-0', !visible);
+        dockIcon.classList.toggle('!p-0', !visible);
+        dockIcon.classList.toggle('-ml-2', !visible);
+    };
+
+    const toggleVisibility = () => {
+        const dockIcon = document.querySelector('.back-to-top-dock-icon');
+        if (!dockIcon) return;
+
+        if (window.scrollY > 300) {
+            if (hideTimeout !== undefined) window.clearTimeout(hideTimeout);
+            hideTimeout = undefined;
+
+            const wasHidden = dockIcon.classList.contains('hidden');
+            dockIcon.classList.remove('hidden');
+            if (wasHidden) {
+                requestAnimationFrame(() => window.scrollY > 300 && setVisible(dockIcon, true));
+            } else {
+                setVisible(dockIcon, true);
+            }
+            return;
+        }
+
+        setVisible(dockIcon, false);
+        if (!dockIcon.classList.contains('hidden') && hideTimeout === undefined) {
+            hideTimeout = window.setTimeout(() => {
+                dockIcon.classList.toggle('hidden', window.scrollY <= 300);
+                hideTimeout = undefined;
+            }, 300);
+        }
+    };
+
+    toggleVisibility();
+    window.addEventListener('scroll', toggleVisibility);
+    document.addEventListener('astro:page-load', toggleVisibility);
+    document.addEventListener('click', (event) => {
+        if (event.target instanceof Element && event.target.closest('#back-to-top')) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    });
+</script>

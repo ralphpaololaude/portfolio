@@ -3,12 +3,14 @@ import type { CollectionEntry } from 'astro:content';
 import PostDate from './PostDate.astro';
 import PostTags from './PostTags.astro';
 import { Image } from 'astro:assets';
+import { DitherField } from "@ui/dither-field"
 
 interface Props {
   post: CollectionEntry<'blog'> | CollectionEntry<'projects'>;
+  timeOffset: number;
 }
 
-const { post } = Astro.props;
+const { post, timeOffset } = Astro.props;
 const { title, description, date, tags, image } = post.data;
 const dirName = post.collection;
 
@@ -16,8 +18,15 @@ const dirName = post.collection;
 const imageWidth = 800; // Set appropriate default width
 const imageHeight = 400; // Set appropriate default height
 ---
-
-<article  class="bg-surface my-8 p-6 rounded-2xl ring-1 ring-primary-muted/30">
+<DitherField client:load
+  className="my-8 rounded-2xl ring-1 ring-primary-muted/30"
+  color={["var(--color-secondary)", "var(--color-secondary)", "var(--color-secondary-foreground)"]}
+  fps={60}
+  pattern="clouds"
+  timeOffset={timeOffset}
+  interactive={false}
+>
+<article class="p-6">
   {
   image && (
     <a href={`/${dirName}/${post.id}`} class="block mb-4">
@@ -47,6 +56,5 @@ const imageHeight = 400; // Set appropriate default height
     </div>
     )}
 
-
-
 </article>
+</DitherField>

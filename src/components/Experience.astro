@@ -2,6 +2,8 @@
 import Section from "./Section.astro";
 import type { ExperienceProps, AboutProps } from "@types";
 import { Icon } from "astro-icon/components";
+import { BlurFade } from "@ui/blur-fade"
+import { DitherField } from "@ui/dither-field"
 
 interface Props {
   experience: ExperienceProps[];
@@ -17,6 +19,7 @@ const { experience } = Astro.props;
     ></div>
     {
       experience.map(({ company, position, startDate, endDate, summary }, index) => (
+        <BlurFade inView client:load duration={0.4} delay={index * 0.1}>
         <div class="flex items-center">
           <div class="text-primary left-0 hidden md:flex">
               <Icon name="experience" size="24"/>
@@ -29,9 +32,15 @@ const { experience } = Astro.props;
                 {index === 0 && ` to ${endDate}`}
               </p>
           </div>
-          <div
-            class="bg-surface relative my-8 w-4/5 rounded-2xl p-6 ring-1 ring-primary-muted/30 ml-auto"
+          <DitherField
+            client:load
+            className="relative my-8 ml-auto w-4/5 rounded-2xl bg-surface/50 backdrop-blur-md ring-1 ring-primary-muted/30"
+            color={["var(--color-secondary)", "var(--color-secondary)", "var(--color-secondary-foreground)"]}
+            pattern="clouds"
+            timeOffset={index * 20}
+            interactive={false}
           >
+          <div class="relative p-6">
             <h3 class="mb-1.5 font-serif text-2xl font-semibold text-foreground">
               {company}
             </h3>
@@ -52,7 +61,9 @@ const { experience } = Astro.props;
               <p class="text-base text-foreground">{summary}</p>
             )}
           </div>
+          </DitherField>
         </div>
+        </BlurFade>
       ))
     }
   </div>

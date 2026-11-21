@@ -34,7 +34,9 @@ const { tag, posts } = Astro.props;
 
 <BaseLayout pageTitle={`Posts | #${tag}`}>
   <Section  text={`#${tag}`} href="projects">
-    {posts.map((post) => <BlogPreview post={post} />)}
+    {posts.map((post, index) => (
+      <BlogPreview post={post} timeOffset={index * 20} />
+    ))}
   </Section>
 
 </BaseLayout>

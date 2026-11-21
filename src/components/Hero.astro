@@ -1,6 +1,7 @@
 ---
 const { author, description, skills, tools, email, cv } = Astro.props;
 import heroEmoji from '@images/emoji.gif?url';
+import { TypingAnimation } from "@ui/typing-animation"
 
 interface Props {
     author: string;
@@ -14,22 +15,24 @@ interface Props {
 
 ---
 
-<div class="hero flex flex-1 flex-col items-center justify-center gap-4 text-center">
-    <h1 class="font-(family-name:--font-hero) text-primary font-rugged p-4 md:text-6xl text-5xl font-medium text-center">
+<div class="hero flex flex-1 flex-col items-center justify-center gap-4 text-center pt-12 px-6 pb-8">
+    <h1 class="font-(family-name:--font-hero) text-primary font-rugged p-4 md:text-6xl mb-3 text-5xl font-medium text-center">
         {author}
     </h1>
     
-    <p class="md:my-10"><img src={heroEmoji} alt="emoji" /></p>
-
-
-    <div class="flex flex-wrap justify-center md:text-lg text-md mb-5 gap-1">
-        {skills.map((skill) => (
-                <span class="font-(family-name:--font-rugged) text-foreground px-8">
-                    {skill}
-                </span>
-            ))}
+    <div class="md:my-10 mb-10">
+        <TypingAnimation client:load
+        words={skills}
+        className="font-(family-name:--font-rugged) text-foreground text-lg lg:text-lg px-8"
+        loop={true}
+        typeSpeed={75}
+        cursorStyle="underscore"
+        />
     </div>
-    <div class="flex flex-wrap justify-center md:mb-8 mb-5 gap-1 md:text-sm text-xs">
+
+    <p class="md:my-10 mb-10"><img src={heroEmoji} alt="emoji" /></p>
+
+    <div class="flex flex-wrap justify-center gap-x-2 gap-y-2.5 mb-10 md:text-sm text-xs">
         {
             tools.map((tool) => (
                 <span class="text-sm px-3 py-1 bg-secondary text-secondary-foreground rounded-full border border-secondary-foreground/30 font-mono">
@@ -38,7 +41,7 @@ interface Props {
             ))
         }
     </div>
-    <div class="flex flex-wrap justify-center gap-3 my-5">
+    <div class="flex flex-wrap justify-center flex gap-4 mb-12">
         <a
             href={`mailto:${email}`}
             class="inline-flex items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-black md:text-base text-sm transition-colors hover:bg-secondary-foreground"
@@ -55,3 +58,5 @@ interface Props {
         </a>
     </div>
 </div>
+
+

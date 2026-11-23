@@ -15,6 +15,7 @@ export const SITE_CONFIG: SiteConfig = {
     { href: "https://www.instagram.com/rappaolau/", icon: "instagram" },
     { href: "https://www.linkedin.com/in/ralphpaololaude/", icon: "linkedin" },
     { href: "https://github.com/ralphpaololaude", icon: "github" },
+    { href: "mailto:ralphpaolo.laude@gmail.com", icon: "email" },
   ]
 };
 

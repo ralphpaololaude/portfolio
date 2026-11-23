@@ -19,7 +19,7 @@ const imageWidth = 800; // Set appropriate default width
 const imageHeight = 400; // Set appropriate default height
 ---
 <DitherField client:load
-  className="my-8 rounded-2xl ring-1 ring-primary-muted/30"
+  className="my-8 rounded-2xl ring-1 ring-primary-muted/30 [&>div:first-child]:blur-sm"
   color={["var(--color-secondary)", "var(--color-secondary)", "var(--color-secondary-foreground)"]}
   fps={60}
   pattern="clouds"

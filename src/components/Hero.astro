@@ -15,12 +15,12 @@ interface Props {
 
 ---
 
-<div class="hero flex flex-1 flex-col items-center justify-center gap-4 text-center pt-12 px-6 pb-8">
-    <h1 class="font-(family-name:--font-hero) text-primary font-rugged p-4 md:text-6xl mb-3 text-5xl font-medium text-center">
+<div class="hero flex flex-1 flex-col items-center justify-center gap-4 text-center pt-12 px-6">
+    <h1 class="font-(family-name:--font-hero) text-primary font-rugged px-4 py-2 md:text-6xl text-5xl font-medium text-center">
         {author}
     </h1>
     
-    <div class="md:my-10 mb-10">
+    <div class="mt-0 md:mb-5 mb-10">
         <TypingAnimation client:load
         words={skills}
         className="font-(family-name:--font-rugged) text-foreground text-lg lg:text-lg px-8"
@@ -30,7 +30,7 @@ interface Props {
         />
     </div>
 
-    <p class="md:my-10 mb-10"><img src={heroEmoji} alt="emoji" /></p>
+    <p class="md:my-5 mb-10"><img src={heroEmoji} alt="emoji" /></p>
 
     <div class="flex flex-wrap justify-center gap-x-2 gap-y-2.5 mb-10 md:text-sm text-xs">
         {

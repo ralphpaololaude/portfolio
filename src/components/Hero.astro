@@ -15,12 +15,12 @@ interface Props {
 
 ---
 
-<div class="hero flex flex-1 flex-col items-center justify-center gap-4 text-center pt-12 px-6">
+<div class="hero flex flex-1 flex-col items-center justify-center gap-1 text-center px-6 pt-4 pb-28 sm:gap-4 sm:pt-12 sm:pb-8">
     <h1 class="font-(family-name:--font-hero) text-primary font-rugged px-4 py-2 md:text-6xl text-5xl font-medium text-center">
         {author}
     </h1>
     
-    <div class="mt-0 md:mb-5 mb-10">
+    <div class="mt-0 mb-2 md:mb-5">
         <TypingAnimation client:load
         words={skills}
         className="font-(family-name:--font-rugged) text-foreground text-lg lg:text-lg px-8"
@@ -30,9 +30,9 @@ interface Props {
         />
     </div>
 
-    <p class="md:my-5 mb-10"><img src={heroEmoji} alt="emoji" /></p>
+    <p class="mb-2 md:my-5"><img src={heroEmoji} alt="emoji" /></p>
 
-    <div class="flex flex-wrap justify-center gap-x-2 gap-y-2.5 mb-10 md:text-sm text-xs">
+    <div class="mb-2 flex flex-wrap justify-center gap-x-2 gap-y-2.5 md:mb-10 md:text-sm text-xs">
         {
             tools.map((tool) => (
                 <span class="text-sm px-3 py-1 bg-secondary text-secondary-foreground rounded-full border border-secondary-foreground/30 font-mono">
@@ -41,7 +41,8 @@ interface Props {
             ))
         }
     </div>
-    <div class="mb-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
+    <div class="mb-8 flex flex-wrap items-center justify-center gap-4 sm:mb-12">
+        <Socials iconButtons />
         <a
             href={`${import.meta.env.BASE_URL}docs/${cv}`}
             download
@@ -49,7 +50,6 @@ interface Props {
         >
             Download CV
         </a>
-        <Socials iconButtons />
     </div>
 </div>
 

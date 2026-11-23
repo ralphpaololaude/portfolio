@@ -29,8 +29,8 @@ const { pageTitle } = Astro.props
     <div class="min-h-screen flex flex-col max-w-3xl mx-auto px-4 sm:px-6">
     <main class="flex flex-1 flex-col gap-8" transition:animate={slide({ duration: '.3s' })}>
       <slot />
-    </main>
     <Dock transition:persist  />
+    </main>
     </div>
   </body>
 </html>

@@ -2,11 +2,23 @@
 import Layout from '@layouts/BaseLayout.astro';
 import Hero from '@components/Hero.astro';
 import { SITE_CONTENT } from "src/config";
+import { DitherField } from "@ui/dither-field"
 
 const {
   hero
 } = SITE_CONTENT;
 ---
+
+
+<DitherField client:load
+  className="min-h-screen" 
+  color="var(--color-secondary)"
+  intensity={1}
+  fps={60}
+  pattern="clouds"
+  >
 <Layout pageTitle={`Portfolio | ${hero.name}`}>
-  <Hero author={hero.name} description={hero.summary} specialty={hero.specialty} skills={hero.skills} tools={hero.tools} email={hero.email} cv={hero.cv} />
+  <Hero author={hero.name} description={hero.summary} specialty={hero.specialty} skills={hero.skills} tools={hero.tools} cv={hero.cv} />
 </Layout>
+
+</DitherField>

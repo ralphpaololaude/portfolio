@@ -1,6 +1,8 @@
 ---
-const { author, description, skills, tools, email, cv } = Astro.props;
+const { author, description, skills, tools, cv } = Astro.props;
 import heroEmoji from '@images/emoji.gif?url';
+import { TypingAnimation } from "@ui/typing-animation"
+import Socials from "@components/Socials.astro";
 
 interface Props {
     author: string;
@@ -8,28 +10,29 @@ interface Props {
     description: string;
     skills: string[];
     tools: string[];
-    email: string;
     cv: string;
     }
 
 ---
 
-<div class="hero flex flex-1 flex-col items-center justify-center gap-4 text-center">
-    <h1 class="font-(family-name:--font-hero) text-primary font-rugged p-4 md:text-6xl text-5xl font-medium text-center">
+<div class="hero flex flex-1 flex-col items-center justify-center gap-1 text-center px-6 pt-4 pb-28 sm:gap-4 sm:pt-12 sm:pb-8">
+    <h1 class="font-(family-name:--font-hero) text-primary font-rugged px-4 py-2 md:text-6xl text-5xl font-medium text-center">
         {author}
     </h1>
     
-    <p class="md:my-10"><img src={heroEmoji} alt="emoji" /></p>
-
-
-    <div class="flex flex-wrap justify-center md:text-lg text-md mb-5 gap-1">
-        {skills.map((skill) => (
-                <span class="font-(family-name:--font-rugged) text-foreground px-8">
-                    {skill}
-                </span>
-            ))}
+    <div class="mt-0 mb-2 md:mb-5">
+        <TypingAnimation client:load
+        words={skills}
+        className="font-(family-name:--font-rugged) text-foreground text-lg lg:text-lg px-8"
+        loop={true}
+        typeSpeed={75}
+        cursorStyle="underscore"
+        />
     </div>
-    <div class="flex flex-wrap justify-center md:mb-8 mb-5 gap-1 md:text-sm text-xs">
+
+    <p class="mb-2 md:my-5"><img src={heroEmoji} alt="emoji" /></p>
+
+    <div class="mb-2 flex flex-wrap justify-center gap-x-2 gap-y-2.5 md:mb-10 md:text-sm text-xs">
         {
             tools.map((tool) => (
                 <span class="text-sm px-3 py-1 bg-secondary text-secondary-foreground rounded-full border border-secondary-foreground/30 font-mono">
@@ -38,20 +41,16 @@ interface Props {
             ))
         }
     </div>
-    <div class="flex flex-wrap justify-center gap-3 my-5">
-        <a
-            href={`mailto:${email}`}
-            class="inline-flex items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-black md:text-base text-sm transition-colors hover:bg-secondary-foreground"
-
-        >
-            Get in touch
-        </a>
+    <div class="mb-8 flex flex-wrap items-center justify-center gap-4 sm:mb-12">
+        <Socials iconButtons />
         <a
             href={`${import.meta.env.BASE_URL}docs/${cv}`}
             download
-            class="inline-flex items-center justify-center rounded-lg border border-primary px-5 py-2.5 text-primary md:text-base text-sm transition-colors hover:border-secondary-foreground hover:text-secondary-foreground"            
+            class="inline-flex items-center justify-center rounded-lg border bg-primary border-primary text-secondary-muted px-5 py-2.5 md:text-base text-sm transition-all transition-colors duration-200 hover:border-secondary-foreground hover:bg-secondary/40 hover:text-secondary-foreground"            
         >
             Download CV
         </a>
     </div>
 </div>
+
+

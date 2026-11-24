@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config';
 
-import preact from '@astrojs/preact';
+import react from '@astrojs/react';
 import icon from 'astro-icon';
 import mdx from '@astrojs/mdx';
 
@@ -9,7 +9,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [preact(), icon(), mdx()],
+    integrations: [react(), icon(), mdx()],
   fonts: [
     {
     provider: fontProviders.google(),
@@ -43,6 +43,9 @@ export default defineConfig({
     },
   ],
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    optimizeDeps: {
+      include: ['react-dom/client'],
+    },
   }
 });

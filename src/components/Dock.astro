@@ -15,9 +15,10 @@ function isActive(href: string) {
 
 ---
 
-<div class="fixed inset-x-0 bottom-0 z-50 px-5 py-3">
+<div class="fixed inset-x-0 bottom-0 z-50 px-0 md:py-3 pb-1 sm:px-5">
     <Dock
         client:load
+        className="w-full sm:w-max border-secondary backdrop-blur-md bg-background/80 border-[1px] shadow-lg shadow-primary/10 transition-all duration-300 gap-8"
     >
         {SITE_CONFIG.navLinks.map((link) => (
         <DockIcon className="md:!h-auto md:!w-auto md:!p-0 md:aspect-auto">

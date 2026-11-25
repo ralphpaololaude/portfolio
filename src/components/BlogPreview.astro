@@ -26,10 +26,10 @@ const imageHeight = 400; // Set appropriate default height
   timeOffset={timeOffset}
   interactive={false}
 >
-<article class="p-6">
+<article class="group relative isolate p-6 transition-transform duration-300 ease-out hover:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none">
   {
   image && (
-    <a href={`/${dirName}/${post.id}`} class="block mb-4">
+    <a href={`/${dirName}/${post.id}`} class="mb-4 block overflow-hidden rounded-lg">
       <Image
         src={image}
         alt={title}
@@ -37,13 +37,13 @@ const imageHeight = 400; // Set appropriate default height
         height={imageHeight}
         decoding='async'
         loading='eager'
-        class="w-full h-48 object-cover rounded-lg shadow-md hover:shadow-lg transition-shadow"
+        class="h-48 w-full rounded-lg object-cover shadow-md transition-[transform,box-shadow] duration-500 ease-out group-hover:scale-[1.02] group-hover:shadow-lg motion-reduce:transform-none motion-reduce:transition-none"
       />
     </a>
   )}
   <header>
     <h2 class="text-2xl font-bold">
-      <a href={`/${dirName}/${post.id}`} class="font-serif text-primary hover:text-foreground transition-all duration-200">
+      <a href={`/${dirName}/${post.id}`} class="font-serif text-primary hover:text-foreground transition-all duration-200 after:absolute after:inset-0 after:content-['']">
         {title}
       </a>
     </h2>
